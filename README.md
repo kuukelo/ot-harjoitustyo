@@ -10,3 +10,5 @@ Tehtävät:
 [Komentorivi](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 Tämä on **paikallisella** koneella tehty muutos.
+
+Vielä *yksi* muutos.
