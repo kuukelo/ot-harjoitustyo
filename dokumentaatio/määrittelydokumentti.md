@@ -1,3 +1,5 @@
+# Reseptitietokanta
+
 **Sovelluksen tarkoitus**
 
 Sovellus on reseptitietokanta, josta voi tallentaa reseptejä tai hakea niitä tiettyjen ominaisuuksien perusteella.
