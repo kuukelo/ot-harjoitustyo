@@ -14,5 +14,5 @@ Ohjelmassa tulee olemaan ainakin seuraavat toiminnallisuudet
     - ruokalaji/tyyppi (pasta, kasvis-, jälkiruoka tms.)
     - ainesosa (sisältää banaania tms.)
     - valmistustekniikka (uunissa, pannulla tms.)
-- Muokkaa reseptiä
+- Muokkaa reseptiä (tällä voi korjata tai lisätä jtn tietoa)
 - Sovellusta voi mahdollisesti laajentaa pitämään kirjaa montako kertaa reseptejä on tehty tms.
