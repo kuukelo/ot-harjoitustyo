@@ -1,3 +1,6 @@
+
+# Harjoitustyö - Reseptitietokanta
+
 **Linkit harjoitustyön dokumentteihin**
 
 [Määrittelydokumentti](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/m%C3%A4%C3%A4rittelydokumentti)
@@ -8,8 +11,19 @@
 
 ________
 ________
+# Viikko2
+
+Linkit:
+
+[Maksukortti1 testit](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko2/Maksukortti/test/MaksukorttiTest.java)
+[Maksukortti2 testit](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/MaksukorttiTest.java)
+[Kassapääte testit](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/KassapaateTest.java)
+[Testikattavuus](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko2/Kattavuusraportti.PNG)
+
 ________
 
+
+# Viikko1
 
 *Tämä on read me tiedosto*
 
