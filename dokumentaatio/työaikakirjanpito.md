@@ -5,4 +5,4 @@ Ti 26.3.
   - Projektiin tutustuminen, aiheen määrittely ja määrittelydokumentin laatiminen
   
   
-  Yhteensä aikaa kulunut *2* h.
+  Yhteensä aikaa kulunut **2** h.
