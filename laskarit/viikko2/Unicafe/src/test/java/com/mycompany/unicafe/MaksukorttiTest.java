@@ -22,6 +22,10 @@ public class MaksukorttiTest {
         assertEquals("saldo: 10.0", kortti.toString());
     }
     @Test
+    public void kortinSaldoAlussaOikein2() {
+        assertEquals(1000, kortti.saldo());
+    }
+    @Test
     public void rahanLataaminenKasvattaaSaldoaOikein() {
         kortti.lataaRahaa(1000);
         assertEquals("saldo: 20.0", kortti.toString());

@@ -209,7 +209,13 @@ public class KassapaateTest {
         assertEquals(400, kortti.saldo());  
     }
     @Test
-    public void rahaaLadatessaKassaKasvaa() {
+    public void rahaaLadatessaNegatiivisestiKortinSaldoEiMuutu() {
+        Maksukortti kortti = new Maksukortti(200);
+        kp.lataaRahaaKortille(kortti, -200);
+        assertEquals(200, kortti.saldo());  
+    }
+    @Test
+    public void rahaaLadatessaLiikaaKassaKasvaa() {
         Maksukortti kortti = new Maksukortti(200);
         kp.lataaRahaaKortille(kortti, 200);
         assertEquals(100200, kp.kassassaRahaa());  
