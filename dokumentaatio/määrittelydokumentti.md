@@ -3,7 +3,7 @@
 **Sovelluksen tarkoitus**
 
 Sovellus on reseptitietokanta, josta voi tallentaa reseptejä tai hakea niitä tiettyjen ominaisuuksien perusteella.
-Tallennettavia ominaisuuksia on esimerkiksi ainesosat, valmistusaika sekä tekniikka.
+Tallennettavia ominaisuuksia on esimerkiksi ainesosat, valmistusaika sekä tekniikka. Harrastan ruuanlaittoa ja kerään paljon reseptejä, joten olen muutenkin miettinyt tällaisen sovelluksen tekemistä.
 
 **Sovelluksen käyttäjät**
 
