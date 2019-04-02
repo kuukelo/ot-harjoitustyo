@@ -9,6 +9,21 @@
 
 
 
+________
+
+# Viikko3
+
+Linkit:
+
+[Monopoli luokkakaavio 1](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko3/Monopoli_luokkakaavio1.jpg)
+
+[Monopoli luokkakaavio 1](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko3/Monopoli_luokkakaavio2.jpg)
+
+[Sekvenssikaavio1](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko3/Sekvenssikaavio1.jpg)
+
+[Sekvenssikaavio2](https://github.com/kuukelo/ot-harjoitustyo/blob/master/laskarit/viikko3/Sekvenssikaavio2.jpg)
+
+
 
 ________
 
