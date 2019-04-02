@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     private List<Recipe> recipes;
+    private List<Recipe> wantedRecipes;
     
     public UserInterface() {
         this.recipes = new ArrayList<>();
@@ -21,6 +22,7 @@ public class UserInterface {
             System.out.println("What would you like to do?");
             System.out.println("1 - Add a recipe");
             System.out.println("2 - List all recipes");
+            System.out.println("3 - Find recipes");
             System.out.println("x - Quit");
             String order = reader.nextLine();
             System.out.println("");
@@ -30,6 +32,10 @@ public class UserInterface {
             }
             if (order.equals("2")) {
                 System.out.println(listAll());
+            }
+            if (order.equals("3")) {
+                findRecipes(reader);
+//                System.out.println(listAll());
                 
             }
             if (order.equals("x")) {
@@ -76,6 +82,33 @@ public class UserInterface {
             returnable += r + "\n";
         }
         return returnable;
+    }
+
+    private void findRecipes(Scanner reader) {
+        this.wantedRecipes = new ArrayList<>();
+        System.out.println("How do you want to filter the recipes?");
+        System.out.println("1 - Based on time");
+//        System.out.println("2 - Based on ingredients");
+//        System.out.println("3 - Based on categories");
+        String order = reader.nextLine();
+        if (order.equals("1")) {
+            System.out.println("What is max time in minutes you want?");
+            int time = Integer.parseInt(reader.nextLine());
+            
+            for (Recipe r: recipes) {
+                if (r.getTime() < time) {
+                    this.wantedRecipes.add(r);
+                }
+            }
+        }
+        System.out.println("Suitable recipes:\n");
+        for (Recipe r: wantedRecipes) {
+            System.out.println(r);
+            }
+//        if (order.equals("2")) {
+//            System.out.println("What ingredient do you want the recipe to have?");
+//            String ingredient = reader.nextLine();
+//        }
     }
 
     
