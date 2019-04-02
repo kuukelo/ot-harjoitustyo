@@ -4,13 +4,13 @@ package com.mycompany.recipedatabase;
 
 import java.util.List;
 
-class Recipe {
+public class Recipe {
     private String name;
     private int time;
     private List<Ingredient> ingredients;
     private List<Category> categories;
     
-    Recipe(String name, Integer time, List<Ingredient> ingredients, List<Category> categories) {
+    public Recipe(String name, Integer time, List<Ingredient> ingredients, List<Category> categories) {
         this.name = name;
         this.time = time;
         this.ingredients = ingredients;

@@ -9,10 +9,13 @@ import java.util.Scanner;
 
 
 public class UserInterface {
-
+    private List<Recipe> recipes;
+    
+    public UserInterface() {
+        this.recipes = new ArrayList<>();
+    }
     
     public void start(Scanner reader) {
-        List<Recipe> recipes = new ArrayList<>();
         while (true) {
             System.out.println("");
             System.out.println("What would you like to do?");
@@ -23,10 +26,10 @@ public class UserInterface {
             System.out.println("");
             
             if (order.equals("1")) {
-                addRecipe(reader, recipes);
+                recipes.add(addRecipe(reader));
             }
             if (order.equals("2")) {
-                listAll(recipes);
+                System.out.println(listAll());
                 
             }
             if (order.equals("x")) {
@@ -36,7 +39,8 @@ public class UserInterface {
         }
     }
 
-    public void addRecipe(Scanner reader, List recipes) {
+    public Recipe addRecipe(Scanner reader) {
+//        Scanner reader = new Scanner(System.in);
         System.out.println("What is the recipe name?");
         String name = reader.nextLine();
         System.out.println("How lond does it take to make in minutes?");
@@ -62,16 +66,16 @@ public class UserInterface {
             categories.add(new Category(category));
         }
         Recipe recipe = new Recipe(name, time, ingredients, categories);
-        recipes.add(recipe);
         System.out.println("Recipe " + name.toLowerCase() + " has been added");
-        
+        return recipe;
     }
 
-    private void listAll(List<Recipe> recipes) {
-        System.out.println("All recipes:");
+    public String listAll() {
+        String returnable = "All recipes:\n";
         for (Recipe r: recipes) {
-            System.out.println(r);
+            returnable += r + "\n";
         }
+        return returnable;
     }
 
     

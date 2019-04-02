@@ -1,7 +1,7 @@
 
 package com.mycompany.recipedatabase;
 
-class Ingredient {
+public class Ingredient {
     
     private String ingredient;
     

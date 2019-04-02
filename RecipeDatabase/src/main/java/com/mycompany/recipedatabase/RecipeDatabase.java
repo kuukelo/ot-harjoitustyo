@@ -12,6 +12,7 @@ public class RecipeDatabase {
         Scanner reader = new Scanner(System.in);
         System.out.println("Welcome to recipe database");// TODO code application logic here
         UserInterface userinterface = new UserInterface();
+//        userinterface.addRecipe(reader);
         userinterface.start(reader);
     }
 

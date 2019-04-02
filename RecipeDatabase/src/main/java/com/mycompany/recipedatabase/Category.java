@@ -1,7 +1,7 @@
 
 package com.mycompany.recipedatabase;
 
-class Category {
+public class Category {
     
     private String category;
     
