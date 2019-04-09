@@ -25,8 +25,7 @@ public class UserInterface {
             System.out.println("3 - Find recipes");
             System.out.println("x - Quit");
             String order = reader.nextLine();
-            System.out.println("");
-            
+            System.out.println("");            
             if (order.equals("1")) {
                 recipes.add(addRecipe(reader));
             }
@@ -35,8 +34,10 @@ public class UserInterface {
             }
             if (order.equals("3")) {
                 findRecipes(reader);
-//                System.out.println(listAll());
-                
+                System.out.println("Suitable recipes:\n");
+                for (Recipe r: wantedRecipes) {
+                    System.out.println(r);
+                }                
             }
             if (order.equals("x")) {
                 break;
@@ -49,8 +50,12 @@ public class UserInterface {
 //        Scanner reader = new Scanner(System.in);
         System.out.println("What is the recipe name?");
         String name = reader.nextLine();
-        System.out.println("How lond does it take to make in minutes?");
-        Integer time = Integer.parseInt(reader.nextLine());
+        System.out.println("How long does it take to make?");
+        System.out.print("Hours: ");
+        Integer hours = Integer.parseInt(reader.nextLine());
+        System.out.print("Minutes: ");
+        Integer minutes = Integer.parseInt(reader.nextLine());
+        Integer time = hours * 60 + minutes;
         System.out.println("What ingredients and how much does it need? "
                 + "Press enter to add an ingredient. x quits.");
         List<Ingredient> ingredients = new ArrayList<>();
@@ -84,13 +89,14 @@ public class UserInterface {
         return returnable;
     }
 
-    private void findRecipes(Scanner reader) {
+    private List<Recipe> findRecipes(Scanner reader) {
         this.wantedRecipes = new ArrayList<>();
         System.out.println("How do you want to filter the recipes?");
         System.out.println("1 - Based on time");
-//        System.out.println("2 - Based on ingredients");
-//        System.out.println("3 - Based on categories");
+        System.out.println("2 - Based on ingredients");
+        System.out.println("3 - Based on categories");
         String order = reader.nextLine();
+        
         if (order.equals("1")) {
             System.out.println("What is max time in minutes you want?");
             int time = Integer.parseInt(reader.nextLine());
@@ -101,15 +107,35 @@ public class UserInterface {
                 }
             }
         }
-        System.out.println("Suitable recipes:\n");
-        for (Recipe r: wantedRecipes) {
-            System.out.println(r);
+
+        if (order.equals("2")) {
+            System.out.println("What ingredient do you want the recipe to have?");
+            String ingredient = reader.nextLine();
+            for (Recipe r: recipes) {
+                for (Ingredient i: r.getIngredients()) {
+                    if (i.equals(ingredient)) {
+                        this.wantedRecipes.add(r);
+                    }
+                }
             }
-//        if (order.equals("2")) {
-//            System.out.println("What ingredient do you want the recipe to have?");
-//            String ingredient = reader.nextLine();
-//        }
+            
+        } 
+        
+        if (order.equals("3")) {
+            System.out.println("What category do you want the recipe to have?");
+            String category = reader.nextLine();
+            for (Recipe r: recipes) {
+                for (Category c: r.getCategories()) {
+                    if (c.equals(category)) {
+                        this.wantedRecipes.add(r);
+                    }
+                }
+            }
+        }
+        return wantedRecipes;
     }
+
+
 
     
     
