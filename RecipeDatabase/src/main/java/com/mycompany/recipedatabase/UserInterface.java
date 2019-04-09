@@ -89,7 +89,7 @@ public class UserInterface {
         return returnable;
     }
 
-    private List<Recipe> findRecipes(Scanner reader) {
+    public List<Recipe> findRecipes(Scanner reader) {
         this.wantedRecipes = new ArrayList<>();
         System.out.println("How do you want to filter the recipes?");
         System.out.println("1 - Based on time");
