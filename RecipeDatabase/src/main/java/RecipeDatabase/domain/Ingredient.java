@@ -1,5 +1,5 @@
 
-package com.mycompany.recipedatabase.domain;
+package RecipeDatabase.domain;
 
 public class Ingredient {
     

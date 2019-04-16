@@ -2,9 +2,9 @@
 
 package RecipeDatabase.userinterface;
 
-import com.mycompany.recipedatabase.domain.Category;
-import com.mycompany.recipedatabase.domain.Ingredient;
-import com.mycompany.recipedatabase.domain.Recipe;
+import RecipeDatabase.domain.Category;
+import RecipeDatabase.domain.Ingredient;
+import RecipeDatabase.domain.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -136,10 +136,5 @@ public class UserInterface {
             }
         }
         return wantedRecipes;
-    }
-
-
-
-    
-    
+    } 
 }
