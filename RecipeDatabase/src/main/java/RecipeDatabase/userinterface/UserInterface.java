@@ -26,6 +26,7 @@ public class UserInterface {
             System.out.println("1 - Add a recipe");
             System.out.println("2 - List all recipes");
             System.out.println("3 - Find recipes");
+            System.out.println("4 - Edit recipe");
             System.out.println("x - Quit");
             String order = reader.nextLine();
             System.out.println("");            
@@ -37,6 +38,13 @@ public class UserInterface {
             }
             if (order.equals("3")) {
                 findRecipes(reader);
+                System.out.println("Suitable recipes:\n");
+                for (Recipe r: wantedRecipes) {
+                    System.out.println(r);
+                }                
+            }
+            if (order.equals("4")) {
+                editRecipe(reader);
                 System.out.println("Suitable recipes:\n");
                 for (Recipe r: wantedRecipes) {
                     System.out.println(r);
@@ -137,4 +145,30 @@ public class UserInterface {
         }
         return wantedRecipes;
     } 
+
+    private void editRecipe(Scanner reader) {
+        System.out.println("What recipe would you like to edit?");
+        String name = reader.nextLine();
+        System.out.println("Would you like to change name (1) or time (2)?");
+        String order = reader.nextLine();
+        if (order.equals("1")) {
+            System.out.println("What is the new name?");
+            String newName = reader.nextLine();
+            for (Recipe r: recipes) {
+                if (r.getName().equals(name)) {
+                    r.setName(newName);
+                }
+            }
+        }
+        if (order.equals("2")) {
+            System.out.println("What is the new time?");
+            int newTime = Integer.parseInt(reader.nextLine());
+            for (Recipe r: recipes) {
+                if (r.getName().equals(name)) {
+                    r.setTime(newTime);
+                }
+            }
+        }
+        
+    }
 }
