@@ -1,7 +1,10 @@
 
 
-package com.mycompany.recipedatabase;
+package RecipeDatabase.userinterface;
 
+import com.mycompany.recipedatabase.domain.Category;
+import com.mycompany.recipedatabase.domain.Ingredient;
+import com.mycompany.recipedatabase.domain.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -113,7 +116,7 @@ public class UserInterface {
             String ingredient = reader.nextLine();
             for (Recipe r: recipes) {
                 for (Ingredient i: r.getIngredients()) {
-                    if (i.equals(ingredient)) {
+                    if (i.getIngredient().equals(ingredient)) {
                         this.wantedRecipes.add(r);
                     }
                 }
@@ -126,7 +129,7 @@ public class UserInterface {
             String category = reader.nextLine();
             for (Recipe r: recipes) {
                 for (Category c: r.getCategories()) {
-                    if (c.equals(category)) {
+                    if (c.getCategory().equals(category)) {
                         this.wantedRecipes.add(r);
                     }
                 }

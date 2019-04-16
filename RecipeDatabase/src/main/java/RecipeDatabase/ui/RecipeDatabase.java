@@ -1,6 +1,8 @@
 
-package com.mycompany.recipedatabase;
+package main;
 
+import RecipeDatabase.userinterface.UserInterface;
+import RecipeDatabase.userinterface.UserInterface;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;

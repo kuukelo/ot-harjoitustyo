@@ -1,6 +1,6 @@
 
 
-package com.mycompany.recipedatabase;
+package com.mycompany.recipedatabase.domain;
 
 import java.util.List;
 

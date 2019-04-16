@@ -1,5 +1,5 @@
 
-package com.mycompany.recipedatabase;
+package com.mycompany.recipedatabase.domain;
 
 public class Category {
     

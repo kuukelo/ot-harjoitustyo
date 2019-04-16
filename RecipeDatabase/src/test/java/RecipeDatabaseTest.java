@@ -1,8 +1,9 @@
 
 
 //import java.io.ByteArrayInputStream;
-import com.mycompany.recipedatabase.Recipe;
-import com.mycompany.recipedatabase.UserInterface;
+
+import com.mycompany.recipedatabase.domain.Recipe;
+import RecipeDatabase.userinterface.UserInterface;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
