@@ -64,8 +64,6 @@ public class RecipeDatabaseTest {
         assertEquals(wanted, recipe.toString());
     }
     
-    public void 
-    
 //    @Test
 //    public void listWorks() {        
 //        userinterface.addRecipe(new Scanner(System.in));

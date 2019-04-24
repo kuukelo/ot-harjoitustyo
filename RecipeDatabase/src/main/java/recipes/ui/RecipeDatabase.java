@@ -1,8 +1,7 @@
 
-package main;
+package recipes.ui;
 
-import RecipeDatabase.userinterface.UserInterface;
-import RecipeDatabase.userinterface.UserInterface;
+
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import recipes.userinterface.UserInterface;
 
 
 public class RecipeDatabase {

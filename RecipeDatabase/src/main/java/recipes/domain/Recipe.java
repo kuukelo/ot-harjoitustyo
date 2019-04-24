@@ -1,6 +1,6 @@
 
 
-package RecipeDatabase.domain;
+package recipes.domain;
 
 import java.util.List;
 

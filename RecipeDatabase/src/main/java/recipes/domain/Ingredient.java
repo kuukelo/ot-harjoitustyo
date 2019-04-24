@@ -1,5 +1,5 @@
 
-package RecipeDatabase.domain;
+package recipes.domain;
 
 public class Ingredient {
     

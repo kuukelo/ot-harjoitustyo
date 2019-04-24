@@ -1,10 +1,10 @@
 
 
-package RecipeDatabase.userinterface;
+package recipes.userinterface;
 
-import RecipeDatabase.domain.Category;
-import RecipeDatabase.domain.Ingredient;
-import RecipeDatabase.domain.Recipe;
+import recipes.domain.Category;
+import recipes.domain.Ingredient;
+import recipes.domain.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
