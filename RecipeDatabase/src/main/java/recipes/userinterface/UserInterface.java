@@ -2,6 +2,12 @@
 
 package recipes.userinterface;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import recipes.domain.Category;
 import recipes.domain.Ingredient;
 import recipes.domain.Recipe;
@@ -14,12 +20,17 @@ import java.util.Scanner;
 public class UserInterface {
     private List<Recipe> recipes;
     private List<Recipe> wantedRecipes;
+    private File file;
+//    private FileWriter fileWriter;
+
     
-    public UserInterface() {
+    public UserInterface() throws IOException {
         this.recipes = new ArrayList<>();
+        this.file = new File("recipes.txt");
+//        this.fileWriter = new FileWriter(file);
     }
     
-    public void start(Scanner reader) {
+    public void start(Scanner reader) throws FileNotFoundException, IOException {
         while (true) {
             System.out.println("");
             System.out.println("What would you like to do?");
@@ -57,7 +68,7 @@ public class UserInterface {
         }
     }
 
-    public Recipe addRecipe(Scanner reader) {
+    public Recipe addRecipe(Scanner reader) throws FileNotFoundException, IOException {
 //        Scanner reader = new Scanner(System.in);
         System.out.println("What is the recipe name?");
         String name = reader.nextLine();
@@ -88,11 +99,14 @@ public class UserInterface {
             categories.add(new Category(category));
         }
         Recipe recipe = new Recipe(name, time, ingredients, categories);
+        addRecipeToFile(recipe);
         System.out.println("Recipe " + name.toLowerCase() + " has been added");
         return recipe;
     }
 
     public String listAll() {
+        ArrayList<Recipe> recipes = getAll();
+        
         String returnable = "All recipes:\n";
         for (Recipe r: recipes) {
             returnable += r + "\n";
@@ -170,5 +184,68 @@ public class UserInterface {
             }
         }
         
+    }
+
+    private ArrayList<Recipe> getAll() {
+        ArrayList<Recipe> recipes = new ArrayList<>();
+
+
+        try (Scanner fileReader = new Scanner(file)) {
+
+            while (fileReader.hasNextLine()) {
+                
+                String name = fileReader.nextLine();
+                int time = Integer.valueOf(fileReader.nextLine());
+                ArrayList<Ingredient> ingredients = new ArrayList<>();
+                ArrayList<Category> categories = new ArrayList<>();
+                
+                while (fileReader.hasNextLine()) {
+                    String ingredient = fileReader.nextLine();
+                    if(ingredient.equals("Categories:")) {
+                        break;
+                    }
+                    ingredients.add(new Ingredient(ingredient));
+                }
+                
+                while (fileReader.hasNextLine()) {
+                    String category = fileReader.nextLine();
+                    if(category.equals("..")) {
+                        break;
+                    }
+                    categories.add(new Category(category));
+                }
+            recipes.add(new Recipe(name, time, ingredients, categories));
+            }
+        } catch (Exception e) {
+            System.out.println("Virhe: " + e.getMessage());
+        }
+        return recipes;
+    }
+
+    private void addRecipeToFile(Recipe recipe) throws FileNotFoundException, IOException {
+        FileWriter fw = new FileWriter(file, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+        
+
+        pw.println(recipe.getName());
+        pw.println(String.valueOf(recipe.getTime()));
+        for (Ingredient i: recipe.getIngredients()) {
+            pw.println(i.getIngredient());
+        }
+
+        pw.println("Categories:");
+        for (Category c: recipe.getCategories()) {
+            pw.println(c.getCategory());
+        }
+        
+//        pw.println("Method:");
+//        int i = 1;
+//        for (Method m: recipe.getMethods()) {
+//            pw.println(i + ". " + m);
+//            i++;
+//        }
+        pw.println("..");
+        pw.close();
     }
 }
