@@ -57,12 +57,7 @@ public class UserInterface {
                 }                
             }
             if (order.equals("4")) {
-                editRecipe(reader);
-                System.out.println("");
-                System.out.println("Suitable recipes:\n");
-                for (Recipe r: wantedRecipes) {
-                    System.out.println(r);
-                }                
+                editRecipe(reader);                
             }
             if (order.equals("x")) {
                 break;
@@ -71,7 +66,6 @@ public class UserInterface {
     }
 
     public Recipe addRecipe(Scanner reader) throws FileNotFoundException, IOException {
-//        Scanner reader = new Scanner(System.in);
         System.out.println("What is the recipe name?");
         String name = reader.nextLine();
         System.out.println("How long does it take to make?");
@@ -81,16 +75,13 @@ public class UserInterface {
         Integer minutes = Integer.parseInt(reader.nextLine());
         Integer time = hours * 60 + minutes;
 
-        System.out.println("What ingredients and how much does it need? "
-                + "Press enter to add an ingredient. x quits.");
+        System.out.println("What ingredients and how much does it need? Press enter to add an ingredient. x quits.");
         List<Ingredient> ingredients = getIngredients(reader);
         
-        System.out.println("What food categories does the recipe belong to? "
-                + "Press enter to add a category. x quits.");
+        System.out.println("What food categories does the recipe belong to? Press enter to add a category. x quits.");
         List<Category> categories = getCategories(reader);
 
-        System.out.println("Write the method one line at a time."
-                + "Press enter to add a category. x quits.");
+        System.out.println("Write the method one line at a time. Press enter to add a category. x quits.");
         List<Method> methods = getMethods(reader);
 
         Recipe recipe = new Recipe(name, time, ingredients, categories, methods);
@@ -119,30 +110,28 @@ public class UserInterface {
         
         if (order.equals("1")) {
             System.out.println("What is max time in minutes you want?");
-            int time = Integer.parseInt(reader.nextLine());  
-            this.wantedRecipes = findRecipesBasedOnTime(time);
+            this.wantedRecipes = findRecipesBasedOnTime(Integer.parseInt(reader.nextLine()));
         }
-
+        
         if (order.equals("2")) {
-            System.out.println("What ingredients do you want the recipe to have?"
-                    + "Press enter to add ingredient. x quits");
+            System.out.println("What ingredients do you want the recipe to have? Press enter to add ingredient. x quits");
             this.wantedRecipes = findRecipesBasedOnIngredients(getIngredients(reader)); 
         } 
         
         if (order.equals("3")) {
-            System.out.println("What categories do you want the recipe to have?"
-                    + "Press enter to add category. x quits");
+            System.out.println("What categories do you want the recipe to have? Press enter to add category. x quits");
             this.wantedRecipes = findRecipesBasedOnCategory(getCategories(reader));
         }
         
         return wantedRecipes;
     } 
 
-    private void editRecipe(Scanner reader) {
+    private void editRecipe(Scanner reader) throws IOException {
         System.out.println("What recipe would you like to edit?");
         String name = reader.nextLine();
-        System.out.println("Would you like to change name (1) or time (2)?");
+        System.out.println("Would you like to change the name (1) or the time (2)?");
         String order = reader.nextLine();
+        List<Recipe> recipes = getAll();
         if (order.equals("1")) {
             System.out.println("What is the new name?");
             String newName = reader.nextLine();
@@ -161,6 +150,8 @@ public class UserInterface {
                 }
             }
         }
+        System.out.println("Recipe " + name + " has been edited.");
+        writeOverFile(recipes);
         
     }
 
@@ -332,6 +323,33 @@ public class UserInterface {
             }
         }
         return wantedrecipes;
+    }
+
+    private void writeOverFile(List<Recipe> recipes) throws IOException {
+        PrintWriter pw = new PrintWriter(file);
+
+        for (Recipe r: recipes) {
+            pw.println(r.getName());
+            pw.println(String.valueOf(r.getTime()));
+            
+            for (Ingredient i: r.getIngredients()) {
+                pw.println(i.getIngredient());
+            }
+
+            pw.println("Categories:");
+            for (Category c: r.getCategories()) {
+                pw.println(c.getCategory());
+            }
+
+            pw.println("Method:");
+            int i = 1;
+            for (Method m: r.getMethods()) {
+                pw.println(i + ". " + m);
+                i++;
+            }
+            pw.println("..");
+        }
+        pw.close();
     }
 
 }
