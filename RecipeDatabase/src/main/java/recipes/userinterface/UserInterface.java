@@ -39,6 +39,7 @@ public class UserInterface {
             System.out.println("2 - List all recipes");
             System.out.println("3 - Find recipes");
             System.out.println("4 - Edit recipe");
+            System.out.println("5 - Get full recipe");
             System.out.println("x - Quit");
             String order = reader.nextLine();
             System.out.println("");            
@@ -58,6 +59,9 @@ public class UserInterface {
             }
             if (order.equals("4")) {
                 editRecipe(reader);                
+            }
+            if (order.equals("5")) {
+                getFullRecipe(reader);                
             }
             if (order.equals("x")) {
                 break;
@@ -342,14 +346,28 @@ public class UserInterface {
             }
 
             pw.println("Method:");
-            int i = 1;
             for (Method m: r.getMethods()) {
-                pw.println(i + ". " + m);
-                i++;
+                pw.println(m);
             }
             pw.println("..");
         }
         pw.close();
+    }
+
+    private void getFullRecipe(Scanner reader) {
+        System.out.println("What recipe do you want?");
+        String name = reader.nextLine();
+        List<Recipe> recipes = getAll();
+        for (Recipe r: recipes) {
+            if (r.getName().equals(name)) {
+                System.out.println("");
+                System.out.println("Recipe for " + name.toLowerCase() + ":");
+                System.out.println(r);
+                for (Method m: r.getMethods()) {
+                    System.out.println(m);
+                }
+            }
+        }
     }
 
 }

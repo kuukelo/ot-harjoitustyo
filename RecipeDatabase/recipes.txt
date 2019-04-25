@@ -7,9 +7,9 @@ Categories:
 easy
 dinner
 Method:
-1. 1. 1. 1. Boil water.
-2. 2. 2. 2. Add tomatoes and cook for 45 minutes.
-3. 3. 3. Add salt to taste and serve.
+1. Boil water.
+2. Add tomatoes and cook for 45 minutes.
+3. Add salt to taste and serve.
 ..
 Olivebread
 90
@@ -20,10 +20,10 @@ water
 Categories:
 italian
 Method:
-1. 1. 1. Cut olives.
-2. 2. 2. Mix flour, water, salt and olives.
-3. 3. 3. Pour in oven dish.
-4. 4. 4. Bake in 200 C oven for 1,5 hours.
+1. Cut olives.
+2. Mix flour, water, salt and olives.
+3. Pour in oven dish.
+4. Bake in 200 C oven for 1,5 hours.
 ..
 Appletart
 90
@@ -33,8 +33,29 @@ sugar
 Categories:
 dessert
 Method:
-1. 1. 1. Cut apples.
-2. 2. 2. Put the crust in the tray.
-3. 3. 3. Put appleslices neatly on top of the crust and pour sugar on top.
-4. 4. 4. Bake in the oven for 1 hour.
+1. Cut apples.
+2. Put the crust in the tray.
+3. Put appleslices neatly on top of the crust and pour sugar on top.
+4. Bake in the oven for 1 hour.
+..
+Pizza
+150
+flour
+water
+oil
+salt
+cheese
+tomatoes
+basil
+Categories:
+italian
+dinner
+Method:
+1. Add all ingredients together.
+2. Knead the batter until its ready. Let it rise.
+3. Make the pizza crust.
+4. Bake in the oven for 10 min.
+5. Add tomatoes and cheese on top.
+6. Bake another 10 min.
+7. Take out of the oven and put basil leaves on top.
 ..
