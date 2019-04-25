@@ -3,18 +3,21 @@
 package recipes.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Recipe {
     private String name;
     private int time;
     private List<Ingredient> ingredients;
     private List<Category> categories;
+    private List<Method> methods;
     
-    public Recipe(String name, Integer time, List<Ingredient> ingredients, List<Category> categories) {
+    public Recipe(String name, Integer time, List<Ingredient> ingredients, List<Category> categories, List<Method> methods) {
         this.name = name;
         this.time = time;
         this.ingredients = ingredients;
         this.categories = categories;
+        this.methods = methods;
     }
     
     
@@ -46,9 +49,20 @@ public class Recipe {
         return categories;
     }
 
+
+
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
+
+    public List<Method> getMethods() {
+        return methods;
+    }
+    
+    public void setMethods(List<Method> methods) {
+        this.methods = methods;
+    }
+
     public String getTimeInHours() {
         if (this.time < 60) {
             return this.time + " min";
@@ -75,6 +89,24 @@ public class Recipe {
         }
         returnable = returnable.substring(0, returnable.length() - 2) + "\n";
         return returnable;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Recipe other = (Recipe) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
     }
     
 }

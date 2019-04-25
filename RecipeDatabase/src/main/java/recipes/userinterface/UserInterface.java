@@ -14,6 +14,7 @@ import recipes.domain.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import recipes.domain.Method;
 
 
 
@@ -49,6 +50,7 @@ public class UserInterface {
             }
             if (order.equals("3")) {
                 findRecipes(reader);
+                System.out.println("");
                 System.out.println("Suitable recipes:\n");
                 for (Recipe r: wantedRecipes) {
                     System.out.println(r);
@@ -56,6 +58,7 @@ public class UserInterface {
             }
             if (order.equals("4")) {
                 editRecipe(reader);
+                System.out.println("");
                 System.out.println("Suitable recipes:\n");
                 for (Recipe r: wantedRecipes) {
                     System.out.println(r);
@@ -64,7 +67,6 @@ public class UserInterface {
             if (order.equals("x")) {
                 break;
             }
-            
         }
     }
 
@@ -78,27 +80,20 @@ public class UserInterface {
         System.out.print("Minutes: ");
         Integer minutes = Integer.parseInt(reader.nextLine());
         Integer time = hours * 60 + minutes;
+
         System.out.println("What ingredients and how much does it need? "
                 + "Press enter to add an ingredient. x quits.");
-        List<Ingredient> ingredients = new ArrayList<>();
-        while (true) {
-            String ingredient = reader.nextLine();
-            if (ingredient.equals("x")) {
-                break;
-            }
-            ingredients.add(new Ingredient(ingredient));
-        }
+        List<Ingredient> ingredients = getIngredients(reader);
+        
         System.out.println("What food categories does the recipe belong to? "
                 + "Press enter to add a category. x quits.");
-        List<Category> categories = new ArrayList<>();
-        while (true) {
-            String category = reader.nextLine();
-            if (category.equals("x")) {
-                break;
-            }
-            categories.add(new Category(category));
-        }
-        Recipe recipe = new Recipe(name, time, ingredients, categories);
+        List<Category> categories = getCategories(reader);
+
+        System.out.println("Write the method one line at a time."
+                + "Press enter to add a category. x quits.");
+        List<Method> methods = getMethods(reader);
+
+        Recipe recipe = new Recipe(name, time, ingredients, categories, methods);
         addRecipeToFile(recipe);
         System.out.println("Recipe " + name.toLowerCase() + " has been added");
         return recipe;
@@ -124,39 +119,22 @@ public class UserInterface {
         
         if (order.equals("1")) {
             System.out.println("What is max time in minutes you want?");
-            int time = Integer.parseInt(reader.nextLine());
-            
-            for (Recipe r: recipes) {
-                if (r.getTime() < time) {
-                    this.wantedRecipes.add(r);
-                }
-            }
+            int time = Integer.parseInt(reader.nextLine());  
+            this.wantedRecipes = findRecipesBasedOnTime(time);
         }
 
         if (order.equals("2")) {
-            System.out.println("What ingredient do you want the recipe to have?");
-            String ingredient = reader.nextLine();
-            for (Recipe r: recipes) {
-                for (Ingredient i: r.getIngredients()) {
-                    if (i.getIngredient().equals(ingredient)) {
-                        this.wantedRecipes.add(r);
-                    }
-                }
-            }
-            
+            System.out.println("What ingredients do you want the recipe to have?"
+                    + "Press enter to add ingredient. x quits");
+            this.wantedRecipes = findRecipesBasedOnIngredients(getIngredients(reader)); 
         } 
         
         if (order.equals("3")) {
-            System.out.println("What category do you want the recipe to have?");
-            String category = reader.nextLine();
-            for (Recipe r: recipes) {
-                for (Category c: r.getCategories()) {
-                    if (c.getCategory().equals(category)) {
-                        this.wantedRecipes.add(r);
-                    }
-                }
-            }
+            System.out.println("What categories do you want the recipe to have?"
+                    + "Press enter to add category. x quits");
+            this.wantedRecipes = findRecipesBasedOnCategory(getCategories(reader));
         }
+        
         return wantedRecipes;
     } 
 
@@ -186,9 +164,8 @@ public class UserInterface {
         
     }
 
-    private ArrayList<Recipe> getAll() {
+    public ArrayList<Recipe> getAll() {
         ArrayList<Recipe> recipes = new ArrayList<>();
-
 
         try (Scanner fileReader = new Scanner(file)) {
 
@@ -198,10 +175,11 @@ public class UserInterface {
                 int time = Integer.valueOf(fileReader.nextLine());
                 ArrayList<Ingredient> ingredients = new ArrayList<>();
                 ArrayList<Category> categories = new ArrayList<>();
+                ArrayList<Method> methods = new ArrayList<>();
                 
                 while (fileReader.hasNextLine()) {
                     String ingredient = fileReader.nextLine();
-                    if(ingredient.equals("Categories:")) {
+                    if (ingredient.equals("Categories:")) {
                         break;
                     }
                     ingredients.add(new Ingredient(ingredient));
@@ -209,12 +187,19 @@ public class UserInterface {
                 
                 while (fileReader.hasNextLine()) {
                     String category = fileReader.nextLine();
-                    if(category.equals("..")) {
+                    if (category.equals("Method:")) {
                         break;
                     }
                     categories.add(new Category(category));
                 }
-            recipes.add(new Recipe(name, time, ingredients, categories));
+                while (fileReader.hasNextLine()) {
+                    String method = fileReader.nextLine();
+                    if (method.equals("..")) {
+                        break;
+                    }
+                    methods.add(new Method(method));
+                }
+                recipes.add(new Recipe(name, time, ingredients, categories, methods));
             }
         } catch (Exception e) {
             System.out.println("Virhe: " + e.getMessage());
@@ -239,13 +224,114 @@ public class UserInterface {
             pw.println(c.getCategory());
         }
         
-//        pw.println("Method:");
-//        int i = 1;
-//        for (Method m: recipe.getMethods()) {
-//            pw.println(i + ". " + m);
-//            i++;
-//        }
+        pw.println("Method:");
+        int i = 1;
+        for (Method m: recipe.getMethods()) {
+            pw.println(i + ". " + m);
+            i++;
+        }
         pw.println("..");
         pw.close();
     }
+
+    private List<Ingredient> getIngredients(Scanner reader) {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        while (true) {
+            String ingredient = reader.nextLine();
+            if (ingredient.equals("x")) {
+                break;
+            }
+            ingredients.add(new Ingredient(ingredient));
+        }
+        return ingredients;
+    }
+
+    private List<Category> getCategories(Scanner reader) {
+        List<Category> categories = new ArrayList<>();
+        while (true) {
+            String category = reader.nextLine();
+            if (category.equals("x")) {
+                break;
+            }
+            categories.add(new Category(category));
+        }
+        return categories;
+    }
+
+    private List<Method> getMethods(Scanner reader) {
+        List<Method> methods = new ArrayList<>();
+        while (true) {
+            String method = reader.nextLine();
+            if (method.equals("x")) {
+                break;
+            }
+            methods.add(new Method(method));
+        }
+        return methods;
+    }
+
+    private List<Recipe> findRecipesBasedOnIngredients(List<Ingredient> ingredients) {
+        ArrayList<Recipe> recipes = getAll();
+        ArrayList<Recipe> wantedrecipes = new ArrayList<>();
+        
+        for (Recipe r: recipes) {
+            boolean found = false;
+            boolean match = true;
+            for (Ingredient i: ingredients) {
+                for (Ingredient i2: r.getIngredients()) {
+                    if (i.equals(i2)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    match = false;
+                    break;
+                }  
+            }
+            if (match) {
+                wantedrecipes.add(r);
+            }
+        }
+        return wantedrecipes;
+    }
+
+    private List<Recipe> findRecipesBasedOnCategory(List<Category> categories) {
+        ArrayList<Recipe> recipes = getAll();
+        ArrayList<Recipe> wantedrecipes = new ArrayList<>();
+        
+        for (Recipe r: recipes) {
+            boolean found = false;
+            boolean match = true;
+            for (Category c: categories) {
+                for (Category c2: r.getCategories()) {
+                    if (c.equals(c2)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    match = false;
+                    break;
+                }  
+            }
+            if (match) {
+                wantedrecipes.add(r);
+            }
+        }
+        return wantedrecipes;
+    }
+
+    private List<Recipe> findRecipesBasedOnTime(int time) {
+        ArrayList<Recipe> recipes = getAll();
+        ArrayList<Recipe> wantedrecipes = new ArrayList<>();
+        
+        for (Recipe r: recipes) {
+            if (r.getTime() <= time) {
+                wantedrecipes.add(r);
+            }
+        }
+        return wantedrecipes;
+    }
+
 }

@@ -1,35 +1,40 @@
-Applepie
-120
-apples
-crust
-sugar
-Categories:
-dessert
-..
 Tomatosoup
-50
+60
 tomatoes
 water
 salt
 Categories:
 easy
-italian
+dinner
+Method:
+1. 1. Boil water.
+2. 2. Add tomatoes and cook for 45 minutes.
+3. Add salt to taste and serve.
 ..
-Mashed potatoes
-30
-potatoes
-butter
+Olivebread
+120
+olives
+flour
 salt
-Categories:
-easy
-side
-..
-Pesto
-20
-basil
-oil
-garlic
-pinenuts
+water
 Categories:
 italian
+Method:
+1. Cut olives.
+2. Mix flour, water, salt and olives.
+3. Pour in oven dish.
+4. Bake in 200 C oven for 1,5 hours.
+..
+Applepie
+90
+apples
+crust
+sugar
+Categories:
+dessert
+Method:
+1. Cut apples.
+2. Put the crust in the tray.
+3. Put appleslices neatly on top of the crust and pour sugar on top.
+4. Bake in the oven for 1 hour.
 ..

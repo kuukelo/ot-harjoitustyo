@@ -2,10 +2,10 @@
 
 //import java.io.ByteArrayInputStream;
 
-import RecipeDatabase.domain.Recipe;
-import RecipeDatabase.userinterface.UserInterface;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringWriter;
 import java.util.Scanner;
@@ -16,6 +16,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
+import recipes.domain.Recipe;
+import recipes.userinterface.UserInterface;
 
 
 public class RecipeDatabaseTest {
@@ -23,9 +25,11 @@ public class RecipeDatabaseTest {
     private String input2;
     private UserInterface userinterface;
     private Recipe recipe;
+    private File file;
     
-    public RecipeDatabaseTest() {
+    public RecipeDatabaseTest() throws IOException {
         this.userinterface = new UserInterface();
+        this.file = new File("recipes.txt");
         this.input = "Pasta\n" + "1\n" + "30\n" + "pasta\n" +"salt\n" +"oil\n" +"water\n" 
                 + "x\n" +"italian\n" +"vegetarian\n" +"dinner\n" +"x\n";
         this.input2 = "Soup\n" + "0\n" + "30\n" + "cream\n" +"chicken\n" +"3 onions\n" +"salt\n" 
@@ -52,7 +56,7 @@ public class RecipeDatabaseTest {
     public void tearDown() {
     }
     @Test
-    public void addingRecipeWorks() {    
+    public void addingRecipeWorks() throws IOException {    
         String wanted = "Pasta, 1 h 30 min\n" +
             "Ingredients:\n" +
             "pasta\n" +
@@ -63,6 +67,17 @@ public class RecipeDatabaseTest {
         Recipe recipe = userinterface.addRecipe(new Scanner(System.in));
         assertEquals(wanted, recipe.toString());
     }
+    @Test
+    public void addingRecipeToTheFileWorks() throws IOException {
+        Recipe recipe = userinterface.addRecipe(new Scanner(System.in));
+        assertTrue(userinterface.getAll().contains(recipe));
+    }
+
+//    @Test
+//    public void listAllWorks() throws IOException {
+//        
+//        assertTrue(userinterface.getAll().contains(recipe));
+//    }
     
 //    @Test
 //    public void listWorks() {        

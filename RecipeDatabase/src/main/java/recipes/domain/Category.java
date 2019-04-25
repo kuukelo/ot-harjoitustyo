@@ -1,6 +1,8 @@
 
 package recipes.domain;
 
+import java.util.Objects;
+
 public class Category {
     
     private String category;
@@ -17,4 +19,23 @@ public class Category {
     public String toString() {
         return this.category;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Category other = (Category) obj;
+        if (!Objects.equals(this.category, other.category)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
