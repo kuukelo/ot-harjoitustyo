@@ -2,6 +2,7 @@
 package recipes.ui;
 
 
+import java.io.File;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,8 +19,8 @@ public class RecipeDatabase {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Welcome to recipe database"); 
-        UserInterface userinterface = new UserInterface();
+        System.out.println("Welcome to recipe database");
+        UserInterface userinterface = new UserInterface(new File("recipes.txt"));
         alustaTietokanta();
         Scanner reader = new Scanner(System.in);
         userinterface.start(reader);

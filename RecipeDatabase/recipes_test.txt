@@ -1,0 +1,15 @@
+Boiled egg
+10
+Categories:
+Method:
+..
+Omelette
+30
+Categories:
+Method:
+..
+Sandwich
+10
+Categories:
+Method:
+..

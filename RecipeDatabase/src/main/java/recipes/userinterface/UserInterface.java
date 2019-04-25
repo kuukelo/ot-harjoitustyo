@@ -22,13 +22,10 @@ public class UserInterface {
     private List<Recipe> recipes;
     private List<Recipe> wantedRecipes;
     private File file;
-//    private FileWriter fileWriter;
-
     
-    public UserInterface() throws IOException {
+    public UserInterface(File file) throws IOException {
         this.recipes = new ArrayList<>();
-        this.file = new File("recipes.txt");
-//        this.fileWriter = new FileWriter(file);
+        this.file = file;
     }
     
     public void start(Scanner reader) throws FileNotFoundException, IOException {
@@ -61,7 +58,9 @@ public class UserInterface {
                 editRecipe(reader);                
             }
             if (order.equals("5")) {
-                getFullRecipe(reader);                
+                System.out.println("What recipe do you want?");
+                String name = reader.nextLine();
+                getFullRecipe(name);                
             }
             if (order.equals("x")) {
                 break;
@@ -202,12 +201,11 @@ public class UserInterface {
         return recipes;
     }
 
-    private void addRecipeToFile(Recipe recipe) throws FileNotFoundException, IOException {
+    public void addRecipeToFile(Recipe recipe) throws FileNotFoundException, IOException {
         FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
         
-
         pw.println(recipe.getName());
         pw.println(String.valueOf(recipe.getTime()));
         for (Ingredient i: recipe.getIngredients()) {
@@ -265,7 +263,7 @@ public class UserInterface {
         return methods;
     }
 
-    private List<Recipe> findRecipesBasedOnIngredients(List<Ingredient> ingredients) {
+    public List<Recipe> findRecipesBasedOnIngredients(List<Ingredient> ingredients) {
         ArrayList<Recipe> recipes = getAll();
         ArrayList<Recipe> wantedrecipes = new ArrayList<>();
         
@@ -291,7 +289,7 @@ public class UserInterface {
         return wantedrecipes;
     }
 
-    private List<Recipe> findRecipesBasedOnCategory(List<Category> categories) {
+    public List<Recipe> findRecipesBasedOnCategory(List<Category> categories) {
         ArrayList<Recipe> recipes = getAll();
         ArrayList<Recipe> wantedrecipes = new ArrayList<>();
         
@@ -317,7 +315,7 @@ public class UserInterface {
         return wantedrecipes;
     }
 
-    private List<Recipe> findRecipesBasedOnTime(int time) {
+    public List<Recipe> findRecipesBasedOnTime(int time) {
         ArrayList<Recipe> recipes = getAll();
         ArrayList<Recipe> wantedrecipes = new ArrayList<>();
         
@@ -329,7 +327,7 @@ public class UserInterface {
         return wantedrecipes;
     }
 
-    private void writeOverFile(List<Recipe> recipes) throws IOException {
+    public void writeOverFile(List<Recipe> recipes) throws IOException {
         PrintWriter pw = new PrintWriter(file);
 
         for (Recipe r: recipes) {
@@ -354,14 +352,12 @@ public class UserInterface {
         pw.close();
     }
 
-    private void getFullRecipe(Scanner reader) {
-        System.out.println("What recipe do you want?");
-        String name = reader.nextLine();
+    public void getFullRecipe(String name) {
         List<Recipe> recipes = getAll();
         for (Recipe r: recipes) {
             if (r.getName().equals(name)) {
                 System.out.println("");
-                System.out.println("Recipe for " + name.toLowerCase() + ":");
+                System.out.println("Full recipe:");
                 System.out.println(r);
                 for (Method m: r.getMethods()) {
                     System.out.println(m);
