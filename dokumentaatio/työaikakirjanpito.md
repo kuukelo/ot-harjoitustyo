@@ -27,5 +27,22 @@ Ti 9.4.
   - Sekvenssikaavion teko 30 min
   - Tallennus 15 min
   
-  Yhteensä aikaa kulunut **16** h.
+  Ke 24.4.
+  - yht. 4h
+  - Koodikatelmointia
+  - Ohjelman muokkaamista
+  
+  To 25.4.
+  - yht 5h
+  - Ohjelmaan tiedoston lisääminen
+  - Testauksen muokkaamista
+
+  Pe 26.4.
+  - yht. 4h
+  - Ohjelman muokkausta
+  - Jar tiedoston teko
+  - Java doc teko
+  - Dokumentaation päivitys
+  
+  Yhteensä aikaa kulunut **29** h.
 
