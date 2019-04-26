@@ -28,6 +28,11 @@ public class UserInterface {
         this.file = file;
     }
     
+    /* 
+     * Ohjelman käynnistys metodi. Kysyy käyttäjältä mitä hän haluaa tehdä. Tästä  metodista ohjataan muihin metodeihin.    
+     * Metodin looppi ajetaan uudestaan ja uudestaan, kunnes käyttäjä sulkee ohjelman. 
+     */
+    
     public void start(Scanner reader) throws FileNotFoundException, IOException {
         while (true) {
             System.out.println("");
@@ -68,6 +73,12 @@ public class UserInterface {
         }
     }
 
+    /* 
+    * Metodin avulla luodaan uusi resepti. Reseptin parametrit nimi ja aika kysytään käyttäjältä. 
+    * Ainesosat, kategoriat ja ohjeet kysytään erillisissä metodeissa. 
+    * Lopuksi metodi ohjaa toiseen metodiin, joka lisää reseptin tiedostoon. 
+    */
+    
     public Recipe addRecipe(Scanner reader) throws FileNotFoundException, IOException {
         System.out.println("What is the recipe name?");
         String name = reader.nextLine();
@@ -92,6 +103,12 @@ public class UserInterface {
         System.out.println("Recipe " + name.toLowerCase() + " has been added");
         return recipe;
     }
+    
+    /* 
+    * Listaa käyttäjälle kaikki tiedostossa olevat reseptit. Metodi ohjaa toiseen metodiin, joka hakee tiedot tiedostosta. 
+    * Tämä metodi, muuttaa ne tulostettavaan muotoon. 
+    * 
+    */
 
     public String listAll() {
         ArrayList<Recipe> recipes = getAll();
@@ -127,7 +144,13 @@ public class UserInterface {
         }
         
         return wantedRecipes;
-    } 
+    }
+    
+    /* 
+    * Metodin avulla muokataan olemassaolevaa reseptiä. Käyttäjältä kysytään mitä muokataan.
+    * Kaikki reseptit haetaan toisesta metodista, etsitään oikea resepti, muokataan sitä ja lopuksi ohjataan
+    * metodiin, joka lisää muutokset tietokantaan.
+    */
 
     private void editRecipe(Scanner reader) throws IOException {
         System.out.println("What recipe would you like to edit?");
@@ -157,6 +180,12 @@ public class UserInterface {
         writeOverFile(recipes);
         
     }
+    
+    /* 
+    * Metodin avulla haetaan kaikki tiedot tiedostosta ja muutetaan tieto listaksi reseptejä. 
+    * 
+    *
+    */
 
     public ArrayList<Recipe> getAll() {
         ArrayList<Recipe> recipes = new ArrayList<>();
@@ -201,6 +230,12 @@ public class UserInterface {
         return recipes;
     }
 
+    /* 
+    * Metodi lisää annetun reseptin tiedot tiedostoon. 
+    * 
+    *
+    */
+    
     public void addRecipeToFile(Recipe recipe) throws FileNotFoundException, IOException {
         FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -227,6 +262,12 @@ public class UserInterface {
         pw.close();
     }
 
+    /* 
+    * Metodi lisää käyttäjän syöttämät ainesosat listaan ja palauttaa sen. 
+    * 
+    *
+    */
+    
     private List<Ingredient> getIngredients(Scanner reader) {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         while (true) {
@@ -239,6 +280,12 @@ public class UserInterface {
         return ingredients;
     }
 
+    /* 
+    * Metodi lisää käyttäjän syöttämät kategoriat listaan ja palauttaa sen. 
+    * 
+    *
+    */
+    
     private List<Category> getCategories(Scanner reader) {
         List<Category> categories = new ArrayList<>();
         while (true) {
@@ -250,7 +297,13 @@ public class UserInterface {
         }
         return categories;
     }
-
+    
+    /* 
+    * Metodi lisää käyttäjän syöttämät ohjeet listaan ja palauttaa ne.
+    * 
+    *
+    */
+    
     private List<Method> getMethods(Scanner reader) {
         List<Method> methods = new ArrayList<>();
         while (true) {
@@ -263,6 +316,12 @@ public class UserInterface {
         return methods;
     }
 
+    /* 
+    * Metodi hakee reseptejä ainesosien perusteella tiedostosta.
+    * 
+    *
+    */
+    
     public List<Recipe> findRecipesBasedOnIngredients(List<Ingredient> ingredients) {
         ArrayList<Recipe> recipes = getAll();
         ArrayList<Recipe> wantedrecipes = new ArrayList<>();
@@ -289,6 +348,12 @@ public class UserInterface {
         return wantedrecipes;
     }
 
+    /* 
+    * Metodi hakee reseptejä kategorioiden perusteella.
+    * 
+    *
+    */
+    
     public List<Recipe> findRecipesBasedOnCategory(List<Category> categories) {
         ArrayList<Recipe> recipes = getAll();
         ArrayList<Recipe> wantedrecipes = new ArrayList<>();
@@ -314,6 +379,12 @@ public class UserInterface {
         }
         return wantedrecipes;
     }
+    
+    /* 
+    * Hakee reseptejä aikaan perustuen.
+    * 
+    *
+    */
 
     public List<Recipe> findRecipesBasedOnTime(int time) {
         ArrayList<Recipe> recipes = getAll();
@@ -327,6 +398,12 @@ public class UserInterface {
         return wantedrecipes;
     }
 
+    /* 
+    * Kirjoittaa tiedoston yli uudestaan kaikki reseptit. Tänne ohjataan reseptin muokkauksesta. Käytännössä metodi siis muokkaa yhtä reseptiä tiedostossa.
+    * 
+    *
+    */
+    
     public void writeOverFile(List<Recipe> recipes) throws IOException {
         PrintWriter pw = new PrintWriter(file);
 
@@ -352,6 +429,12 @@ public class UserInterface {
         pw.close();
     }
 
+    /* 
+    * Tulostaa käyttäjälle halutun reseptin. Hakee ensin kaikki, etsii oikean reseptin ja tulostaa sen tiedot. 
+    * 
+    *
+    */
+    
     public void getFullRecipe(String name) {
         List<Recipe> recipes = getAll();
         for (Recipe r: recipes) {
