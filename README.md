@@ -27,3 +27,6 @@ Testikattavuusraportti luodaan komennolla **mvn jacoco:report**
 
 Checkstyle tarkistukset suoritetaan komennolla **mvn jxr:jxr checkstyle:checkstyle**
   - Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto target/site/checkstyle.html
+  
+JavaDoc generoidaan komennolla **mvn javadoc:javadoc**
+  - JavaDocia voi tarkastella avaamalla selaimella tiedosto target/site/apidocs/index.html
