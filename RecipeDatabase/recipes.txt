@@ -366,3 +366,13 @@ Boiled egg
 Categories:
 Method:
 ..
+Mira's stew
+100
+onions
+salt
+Categories:
+dinner
+Method:
+1. Cut onions.
+2. Add salt.
+..
