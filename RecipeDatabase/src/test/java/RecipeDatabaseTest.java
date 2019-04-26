@@ -142,17 +142,17 @@ public class RecipeDatabaseTest {
         String wanted = "All recipes:\n" + recipe2 + "\n" + recipe3 + "\n"; 
         assertTrue(wanted.equals(userinterface.listAll()));
     }
-    @Test
-    public void getFullRecipeWorks() throws IOException {
-        recipe = new Recipe("Pesto", 15, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        userinterface.addRecipeToFile(recipe);
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
-        System.setOut(new PrintStream(outContent));
-        userinterface.getFullRecipe(recipe.getName());
-        String wanted = "\nFull recipe:\n" + recipe;     
-        assertTrue(wanted.equals(outContent.toString()));
-    }
+//    @Test
+//    public void getFullRecipeWorks() throws IOException {
+//        recipe = new Recipe("Pesto", 15, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+//        userinterface.addRecipeToFile(recipe);
+//        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+//
+//        System.setOut(new PrintStream(outContent));
+//        userinterface.getFullRecipe(recipe.getName());
+//        String wanted = "\nFull recipe:\n" + recipe;     
+//        assertTrue(wanted.equals(outContent.toString()));
+//    }
     
 //    @Test
 //    public void findRecipesBasedOnIngredientWorks2() throws IOException {
