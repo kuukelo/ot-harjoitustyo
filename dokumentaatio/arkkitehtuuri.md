@@ -3,7 +3,7 @@
 ## Rakenne
 Ohjelma noudattaa seuraavaa pakkausrakennetta. Aluksi siirrytään luokkaan ui, josta ohjelma käynnistetään. Suurin osa metodeista löytyy userinterfacen alta, joka käyttää hyödykseen luokkia domainista. 
 
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/Rakenne.jpg)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/Rakenne.png)
 
 ## Luokkakaavio
 
