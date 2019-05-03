@@ -39,7 +39,7 @@ Method:
 4. Bake in the oven for 1 hour.
 ..
 Pizza
-150
+60
 flour
 water
 oil
@@ -58,4 +58,17 @@ Method:
 5. Add tomatoes and cheese on top.
 6. Bake another 10 min.
 7. Take out of the oven and put basil leaves on top.
+..
+Chocolate mousse
+180
+chocolate
+sugar
+cream
+gelatin
+Categories:
+dessert
+Method:
+1. Boil cream.
+2. Add rest of the ingredients.
+3. Whisk and chill for 2 hours.
 ..

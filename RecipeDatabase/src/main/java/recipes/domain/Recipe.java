@@ -10,16 +10,36 @@ public class Recipe {
     private int time;
     private List<Ingredient> ingredients;
     private List<Category> categories;
-    private List<Method> methods;
+    private Integer id;
+    private String instructions;
     
-    public Recipe(String name, Integer time, List<Ingredient> ingredients, List<Category> categories, List<Method> methods) {
+    public Recipe(String name, Integer time, List<Ingredient> ingredients, List<Category> categories, String instructions) {
         this.name = name;
         this.time = time;
         this.ingredients = ingredients;
         this.categories = categories;
-        this.methods = methods;
+        this.instructions = instructions;
     }
-    
+//    public Recipe(Integer id, String name, Integer time, String instructions) {
+//        this.id = id;
+//        this.name = name;
+//        this.time = time;
+//        this.instructions = instructions;
+//    }
+    public Recipe(Integer id, String name, Integer time, List<Ingredient> ingredients, List<Category> categories, String instructions) {
+        this.id = id;
+        this.name = name;
+        this.time = time;
+        this.ingredients = ingredients;
+        this.categories = categories;
+        this.instructions = instructions;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public Integer getId() {
+        return this.id;
+    }
     
     public String getName() {
         return name;
@@ -48,19 +68,14 @@ public class Recipe {
     public List<Category> getCategories() {
         return categories;
     }
-
-
-
+    public String getInstructions() {
+        return this.instructions;
+    }
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
     public void setCategories(List<Category> categories) {
         this.categories = categories;
-    }
-
-    public List<Method> getMethods() {
-        return methods;
-    }
-    
-    public void setMethods(List<Method> methods) {
-        this.methods = methods;
     }
 
     public String getTimeInHours() {
@@ -78,17 +93,21 @@ public class Recipe {
         }
     }
     public String toString() {
-        String returnable = name + ", " + getTimeInHours() + 
-                "\nIngredients:";
-        for (Ingredient i: ingredients) {
-            returnable += "\n" + i;
-        }
+        String returnable = name + ", " + getTimeInHours();
+//        + 
+//                "\nIngredients:";
+//        for (Ingredient i: ingredients) {
+//            returnable += "\n" + i;
+//        }
         returnable += "\nCategories: ";
         for (Category c: categories) {
             returnable += c + ", ";
         }
         returnable = returnable.substring(0, returnable.length() - 2) + "\n";
         return returnable;
+    }
+    public String getFullRecipe() {
+        return "\n" + toString() + "\nInstructions: \n" + this.instructions;
     }
 
     @Override
@@ -108,5 +127,6 @@ public class Recipe {
         }
         return true;
     }
+    
     
 }

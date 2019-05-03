@@ -4,11 +4,21 @@ package recipes.domain;
 import java.util.Objects;
 
 public class Ingredient {
-    
+    private Integer id;
     private String ingredient;
     
     public Ingredient(String ingredient) {
         this.ingredient = ingredient;
+    }
+    public Ingredient(Integer id, String ingredient) {
+        this.id = id;
+        this.ingredient = ingredient;
+    }
+    public Integer getId() {
+        return this.id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
     public String getIngredient() {
         return this.ingredient;

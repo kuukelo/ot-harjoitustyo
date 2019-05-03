@@ -4,11 +4,21 @@ package recipes.domain;
 import java.util.Objects;
 
 public class Category {
-    
+    private Integer id;
     private String category;
     
     public Category(String category) {
         this.category = category;
+    }
+    public Category(Integer id, String category) {
+        this.id = id;
+        this.category = category;
+    }
+    public Integer getId() {
+        return this.id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
     public String getCategory() {
         return this.category;
@@ -37,5 +47,6 @@ public class Category {
         }
         return true;
     }
+
     
 }
