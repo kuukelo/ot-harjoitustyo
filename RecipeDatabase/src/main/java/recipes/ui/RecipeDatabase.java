@@ -1,22 +1,15 @@
 
 package recipes.ui;
 
-
-import java.io.File;
 import java.io.IOException;
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,12 +20,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import recipes.dao.IngredientDao;
-import recipes.dao.IngredientRecipeDao;
-import recipes.dao.RecipeDao;
 import recipes.domain.Category;
 import recipes.domain.Ingredient;
-import recipes.domain.IngredientRecipe;
 import recipes.domain.Recipe;
 import recipes.editor.DatabaseEditor;
 
@@ -117,24 +106,6 @@ public class RecipeDatabase extends Application {
 
     public void start(Stage window) throws SQLException {
         
-//        List<Ingredient> is = new ArrayList<>();
-//            String i = "plums";
-//            is.add(new Ingredient(i));
-//            i = "soda";
-//            is.add(new Ingredient(i));
-//            i = "lemonjuice";
-//            is.add(new Ingredient(i));
-//            System.out.println(is);
-//            
-//            List<Category> cs = new ArrayList<>();
-//            String c = "dinner";
-//            cs.add(new Category(c));
-//            c = "drink";
-//            cs.add(new Category(c));
-//            
-//            Recipe r = new Recipe("Plumdrink", 15, is, cs, "1. Pour all in a glass.");
-//            userinterface.addRecipeToDatabase(r);
-//            System.out.println("Jou");
         window.setTitle("Recipe database");
         window.show(); 
         
@@ -151,29 +122,8 @@ public class RecipeDatabase extends Application {
     }
 
     public static void main(String[] args) throws SQLException {
-//        DatabaseEditor.setUpDatabase();
-//            IngredientDao iDao = new IngredientDao();
-//            IngredientRecipeDao irDao = new IngredientRecipeDao();
-//            for (Ingredient i: iDao.list()) {
-//                System.out.println(i.getId() + " " + i);
-//            }
-//            System.out.println("Tässä on lista ir: " + irDao.list());
-//            RecipeDao rDao = new RecipeDao();
-//            for (Recipe r: rDao.list()) {
-//                System.out.println(r + "\n" + r.getInstructions());
-//                System.out.println(irDao.listByRecipe(r.getId()));
-//            }
-            
-//            rDao.delete(5);
-            
-            
-
-
         launch(RecipeDatabase.class);
     }
-
-
-
 
     private Node getContentAdd() {
         GridPane contentAdd = new GridPane();
@@ -252,9 +202,7 @@ public class RecipeDatabase extends Application {
         Label text = new Label("How do you want to filter the recipes? ");
         contentFind.add(text, 0, 0);
         contentFind.add(buttons2, 0, 1);
-        
         return contentFind;
-        
     }
 
     private GridPane getTimeContent() {
@@ -282,6 +230,7 @@ public class RecipeDatabase extends Application {
             label.setText(getSuitables(recipes));
             contentTime.add(label, 0, 3);
         });
+        
         return contentTime;
     }
 
@@ -309,6 +258,7 @@ public class RecipeDatabase extends Application {
             label.setText(getSuitables(recipes));
             content.add(label, 0, 3);
         });
+        
         return content;
     }
     private Node getCategoryContent() {
