@@ -126,10 +126,9 @@ public class DatabaseEditor {
 
     
     public List<Recipe> findRecipesBasedOnIngredients(List<Ingredient> ingredients) throws SQLException {
-        List<Recipe> recipes = rDao.list();
         List<Recipe> wantedrecipes = new ArrayList<>();
         
-        for (Recipe r: recipes) {
+        for (Recipe r: rDao.list()) {
             if (r.getIngredients().containsAll(ingredients)) {
                 wantedrecipes.add(r);
             }
@@ -147,10 +146,9 @@ public class DatabaseEditor {
 
     
     public List<Recipe> findRecipesBasedOnCategory(List<Category> categories) throws SQLException {
-        List<Recipe> recipes = rDao.list();
         ArrayList<Recipe> wantedrecipes = new ArrayList<>();
         
-        for (Recipe r: recipes) {
+        for (Recipe r: rDao.list()) {
             if (r.getCategories().containsAll(categories)) {
                 wantedrecipes.add(r);
             }
@@ -168,10 +166,9 @@ public class DatabaseEditor {
 
 
     public List<Recipe> findRecipesBasedOnTime(int time) throws SQLException {
-        List<Recipe> recipes = rDao.list();
         ArrayList<Recipe> wantedrecipes = new ArrayList<>();
         
-        for (Recipe r: recipes) {
+        for (Recipe r: rDao.list()) {
             if (r.getTime() <= time) {
                 wantedrecipes.add(r);
             }
@@ -189,8 +186,7 @@ public class DatabaseEditor {
 
     
     public Recipe getRecipe(String name) throws SQLException {
-        List<Recipe> recipes = rDao.list();
-        for (Recipe r: recipes) {
+        for (Recipe r: rDao.list()) {
             if (r.getName().toLowerCase().equals(name.toLowerCase())) {
                 return r;
             }
@@ -207,8 +203,7 @@ public class DatabaseEditor {
 
 
     public void editTime(String recipeName, int time) throws SQLException {
-        List<Recipe> recipes = rDao.list();
-        for (Recipe r: recipes) {
+        for (Recipe r: rDao.list()) {
             if (r.getName().equals(recipeName)) {
                 r.setTime(Integer.valueOf(time));
                 rDao.update(r);
