@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import recipes.dao.CategoryDao;
 import recipes.dao.CategoryRecipeDao;
 import recipes.dao.IngredientDao;
@@ -32,18 +30,14 @@ import recipes.domain.IngredientRecipe;
  * The methods send info back to daos to save or to ui to show to the user.
  * @author Elina
  */
-@Component
+
 public class DatabaseEditor {
     
-    @Autowired
+
     RecipeDao rDao;
-    @Autowired
     IngredientDao iDao;
-    @Autowired
     CategoryDao cDao;
-    @Autowired
     IngredientRecipeDao irDao;
-    @Autowired
     CategoryRecipeDao crDao;
     
     /**

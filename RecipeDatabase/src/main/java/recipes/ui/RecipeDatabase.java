@@ -347,13 +347,13 @@ public class RecipeDatabase extends Application {
         Label label = new Label("Here you can get full recipe.");
         Label nameLabel = new Label("What is the name of the recipe you want? ");
         TextField name = new TextField();
-        Button getFullRecipe = new Button("Get the recipe");
+        Button getFull = new Button("Get the recipe");
         Label recipeLabel = new Label("");
         content.addColumn(0, label, nameLabel, getFull, recipeLabel);
         content.add(name, 1, 1);
         
         
-        getFullRecipe.setOnAction((event) -> {
+        getFull.setOnAction((event) -> {
             Recipe recipe = null;            
             try {
                 recipe = dbEditor.getRecipe(name.getText().trim());
