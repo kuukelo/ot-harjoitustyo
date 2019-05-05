@@ -3,7 +3,7 @@
 **Sovelluksen tarkoitus**
 
 Sovellus on reseptitietokanta, josta voi tallentaa reseptejä tai hakea niitä tiettyjen ominaisuuksien perusteella.
-Tallennettavia ominaisuuksia on esimerkiksi ainesosat, valmistusaika sekä tekniikka. Harrastan ruuanlaittoa ja kerään paljon reseptejä, joten olen muutenkin miettinyt tällaisen sovelluksen tekemistä.
+Tallennettavia ominaisuuksia on esimerkiksi ainesosat, valmistusaika sekä kategoriat. Harrastan ruuanlaittoa ja kerään paljon reseptejä, joten olen muutenkin miettinyt tällaisen sovelluksen tekemistä.
 
 **Sovelluksen käyttäjät**
 
@@ -18,6 +18,5 @@ Ohjelmassa tulee olemaan ainakin seuraavat toiminnallisuudet
     - valmistusaika
     - ruokalaji/tyyppi (pasta, kasvis-, jälkiruoka tms.)
     - ainesosa (sisältää banaania tms.)
-    - valmistustekniikka (uunissa, pannulla tms.)
 - Muokkaa reseptiä (tällä voi korjata tai lisätä jtn tietoa)
 - Sovellusta voi mahdollisesti laajentaa pitämään kirjaa montako kertaa reseptejä on tehty tms.
