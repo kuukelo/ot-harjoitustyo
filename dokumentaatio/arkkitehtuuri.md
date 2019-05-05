@@ -14,9 +14,9 @@ Käyttöliittymä on graafinen. Perusnäkymä pysyy koko ajan samana (eli napit 
 
 Resepti luokka pitää kirjaa resepteistä, niihin on tallennettu lista ainesosista, kategorioista. Näille on myös omat luokkansa ohjelmassa. Lisäksi reseptiin tallennetaan tieto reseptin nimestä, valmistusajasta sekä valmistusohjeista. Ingredient ja Category luokat tarjoavat vain perus setterit ja getterit. Recipe -luokka tarjoaa kuitenkin myös muutaman toString() tyyppisen metodin. 
 
-### Luokkakaavio
+### Tietokantakaavio
 
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Luokkakaavio.png)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tietokantakaavio.PNG)
 
 ### Sekvenssikaavio
 
