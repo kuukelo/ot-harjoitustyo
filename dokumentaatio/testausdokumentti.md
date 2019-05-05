@@ -11,7 +11,7 @@ Editorin kautta tulee testatuksi myös dao luokat, joista editori hakee tietoa.
 Graafisen käyttöliittymä on jätetty testien ulkopuolelle, eikä sen metodeja siis ole testattu, muuten kuin manuaalisesti.
 
 ### Testauskattavuus
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/testikattavuus.PNG)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Testikattavuus.PNG)
 
 Testikattavuus on tällä hetkellä riittävä. Kaikkia gettereitä ja settereitä ei tarkisteta. 
 Kattavuudesta uupuu myös rivit, jotka käsittelevät virhetilanteita, jos tietokantaa ei esimerkiksi löydy. 
