@@ -14,15 +14,22 @@ Käyttöliittymä on graafinen. Perusnäkymä pysyy koko ajan samana (eli napit 
 
 Resepti luokka pitää kirjaa resepteistä, niihin on tallennettu lista ainesosista, kategorioista. Näille on myös omat luokkansa ohjelmassa. Lisäksi reseptiin tallennetaan tieto reseptin nimestä, valmistusajasta sekä valmistusohjeista. Ingredient ja Category luokat tarjoavat vain perus setterit ja getterit. Recipe -luokka tarjoaa kuitenkin myös muutaman toString() tyyppisen metodin. 
 
-### Tietokantakaavio
+## Tietokantakaavio
 
 ![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tietokantakaavio.png)
 
 Ohessa on kuvaus tietokannasta ja tietokantataulujen suhteista toisiinsa.  
 
-### Sekvenssikaavio
+## Ohjelman toiminnallisuudet
 
-#### Uuden reseptin lisääminen ja reseptien hakeminen ajan perusteella
+Ohjelman perustoiminnallisuuksia ovat 
+- reseptin lisääminen
+- kaikkien reseptien hakeminen ja niiden lajittelu ajan ja kategorioiden perusteella
+- reseptin muokkaaminen (aika, nimi tai ohjeet)
+- sopivan reseptin etsintä ajan, aineseosien tai kategorioiden perusteella
+- koko reseptin hakeminen
+
+RecipeDatabase vastaa graafisesta käsittelystä, DatabaseEditor tiedon käsittelystä, Daot tiedon hakemisest ja tallentamisesta tietokantaan ja domain-luokat olioiden luomisesta. 
 
 Ohjelma on niin monimutkainen, että sekvenssikaavion tekeminen ei ole järkevää. Siitä tulisi aivan liian pitkä. Tässä kuitenkin tekstimuotoinen kuvaus eräästä toiminnallisuudesta ohjelmassa:
 
@@ -42,3 +49,6 @@ Tiedot tallennetaan h2-tietokantaan. Tietokannassa on viisi taulukkoa, johon tie
 
 Testit käyttävät samaa tietokantaa, mutta ennen testausta, ne tallettavat tietokannassa olevan tiedon listalle. Testien lopuksi tieotkantaan tehdyt muutokset pyyhitään ja samat tiedot palautetaan sinne takaisin. 
 
+## Ohjelman rakenteeseen jääneet heikkoudet
+
+Ohjelmaa olisi voinut jakaa vielä enemmän eri luokkiin. Tällä hetkellä ui ja editor sisältävät vain yhdet jättiluokat. Lisäksi metodeja olisi voinut vielä selkiyttää, nyt on vielä muutama spesifiin tarkoitukseen tarkoitettu metodi joita eivät muut metodit voi välttämättä hyödyntää. Tietokannasta haetaan myös vähän väliä tarpeetonta tietoa. Kun haetaan yhtä tiettyä reseptiä, on turhaa hakea kaikkien reseptien ainesosia ja kategorioita, ennen kuin tiedetään, että kyseinen resepti todella halutaan. rDaoon voisi luoda luokan, joka hakee suoraan nimen perusteella reseptiä, sillä nimet ovat myös uniikkeja. 
