@@ -18,16 +18,27 @@ Resepti luokka pitää kirjaa resepteistä, niihin on tallennettu lista ainesosi
 
 ![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tietokantakaavio.png)
 
+Ohessa on kuvaus tietokannasta ja tietokantataulujen suhteista toisiinsa.  
+
 ### Sekvenssikaavio
 
 #### Uuden reseptin lisääminen ja reseptien hakeminen ajan perusteella
 
-Sekvenssikaaviosta puuttuu reseptin ohjeiden (method) lisääminen. Sillä se on lisätty ohjelmaan viime metreillä.
+Ohjelma on niin monimutkainen, että sekvenssikaavion tekeminen ei ole järkevää. Siitä tulisi aivan liian pitkä. Tässä kuitenkin tekstimuotoinen kuvaus eräästä toiminnallisuudesta ohjelmassa:
 
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Sekvenssikaavio.jpg)
+Täyden reseptin hakeminen nimellä Pizza. Käyttäjä on kirjoittanut tekstikenttään "Pizza" ja klikannut nappia "Get full recipe".
+- RecipeDatabase kutsuu RecipeEditorin metodia getRecipe("Pizza");
+- RecipeEditor kutsuu RecipeDaon metodia list()
+- RecipeDao hakee tietokannasta tiedon kaikista resepteistä
+- RecipeDao luo uusia reseptiolioita ja hakee samalla tiedon ainesosista IngredientRecipeDaosta (listByRecipe) sekä kategorioista CategoryDaosta (listByRecipe). Nämä puolestaan hakevat tietokannasta listat ainesosista ja kategorioista, jotka vastaavat haettuja reseptejä (vertailemalla id:ta).
+- RecipeDao asettaa luodut Recipe-oliot listalle ja palauttaa ne DatabaseEditorille. 
+- DatabaseEditor käy reseptilistaa läpi ja vertailee reseptien nimiä haettuun nimeen "Pizza". Jos nimi on sama, palauttaa editori kyseisen reseptiolion. Jos yksikään resepti ei ole samanniminen, palauttaa metodi null.
+- RecipeDatabase ottaa reseptin, tarkistaa, ettei se ole null ja ottaa sen tiedot tekstimuodossa Recipe-luokalta ja lisää sitten sen graafiseen näkymään ja näyttää käyttäjälle. 
 
 
 ## Tietojen pysyväistallennus
 
-Tarkoituksena on ensi viikolla muokata ohjelma ottamaan ja tallentamaan tiedot tietokantaan. Tällä hetkellä tiedot haetaan ja tallennetaan kuitenkin tiedostoon recipes.txt. Tiedot tallennetaan niin, että tiedosto on myös helposti luettava avatessa ilman ohjelmaa. Ensin on otsikko, sen alla aika, sitten listana ainesosat, otikko Categories, sen alla listana kategoriat, sitten otsikko Method ja sen alla ohjeet listattuna. Tiedosto tallentaa reseptiä tallentaessa jokaisen uuden ohjerivin eteen juoksevan numeron. Näin ohjeet on selkeät, kun ne tulostetaan käyttäjälle.
+Tiedot tallennetaan h2-tietokantaan. Tietokannassa on viisi taulukkoa, johon tietoa tallennetaan ja haetaan. Ylempänä on tietokantakaavio, jossa taulujen suhteet näkyvät. Dao luokat ovat ainoita, jotka hakevat ja tallentavat tietoa tietokantaan. Tietokannan alustus löytyy kuitenkin editori luokasta, mutta ohjelma ei käytä sitä aktiivisesti. Metodi on jätetty ohjelmaan siltä varalta, että joku käyttäjä haluaa alustaa tietokannan uudestaan. Näin ohjelman jatkokehittely on helpompaa.
+
+Testit käyttävät samaa tietokantaa, mutta ennen testausta, ne tallettavat tietokannassa olevan tiedon listalle. Testien lopuksi tieotkantaan tehdyt muutokset pyyhitään ja samat tiedot palautetaan sinne takaisin. 
 
