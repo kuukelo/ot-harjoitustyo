@@ -44,5 +44,27 @@ Ti 9.4.
   - Java doc teko
   - Dokumentaation päivitys
   
-  Yhteensä aikaa kulunut **29** h.
+  To 2.5.
+  - yht. 12 h
+  - Graafisen käyttöliittymän rakentamista
+  - Tietokannan ja daon rakentelua
+  
+  Pe 3.5.
+  - yht. 6h
+  - Tietokannan ja daon rakentelua
+  - Ohjelman jatkokehittelyä
+  - Testien teko kokonaan alusta
+  
+  La 4.5.
+  - yht 1h
+  - Ohjelman jatkokehittelyä
+  
+  Su 5.5.
+  - yht. 9h
+  - Ohjelman jatkokehittelyä
+  - JavaDocin päivittämistä
+  - Dokumentaation päivittämistä
+  - Palautus
+  
+  Yhteensä aikaa kulunut **57** h.
 
