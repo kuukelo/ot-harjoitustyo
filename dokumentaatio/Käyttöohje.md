@@ -13,7 +13,7 @@ Sovelluksella on tällä hetkellä vain yksi käyttäjärooli, eikä ohjelma ero
 Käynnistä ohjelma. Ohjelma avaa graafisen käyttöliittymän, jossa on viisi vaihtoehtoa. 
 
 ### Add recipe
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Add.png)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Add.PNG)
 
 Tämän avulla voit lisätä uuden reseptin tiedostoon. Syötä kaikki tarvittavat tiedot. Voit jättää minkä tahansa kohdan nimeä lukuun ottamatta tyhjäksi. Muista merkitä hours ja minutes kokonaisilla numeroilla. Älä lisää tekstiä. Paina lopuksi Add-nappia, jolloin resepti lisätään tietokantaan. 
 
@@ -23,12 +23,12 @@ Tämän avulla voit lisätä uuden reseptin tiedostoon. Syötä kaikki tarvittav
 Täällä näet kaikki tietokannassa olevat reseptit. Voit järjestää reseptejä ajan mukaan (Sort recipes by time) tai kategorioiden mukaan (Sort recipes by Category). Ohjelma näyttää kaikki reseptit halutussa järjestyksessä. Voit klikata reseptin nimeä, jolloin ohjelma näyttää reseptin kokonaisuudessaan.
 
 ### Find recipes
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Find.png)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Find.PNG)
 
 Täällä voit etsiä reseptejä tietyillä hakuehdoilla. Voit asettaa maksimiajan tai kirjoittaa listan ainesosia tai kategorioita, jotka pitää reseptistä löytyä. Ohjelma näyttää sopivat reseptit listana. Voit klikata reseptin nimeä, jolloin ohjelma näyttää reseptin nimen kokonaisuudessaan.
 
 ### Edit recipe
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Edit.png)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Edit.PNG)
 
 Täällä voit muokata haluamaasi reseptiä. Tällä hetkellä muokata voi nimeä, aikaa ja ohjetta. Paina lopuksi save, jotta reseptiin tehdyt muutokset tallennetaan tietokantaan.
 
