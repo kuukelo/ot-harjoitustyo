@@ -23,7 +23,7 @@ Sovellus on tarkoitettu reseptien tallentamiseen ja hakemiseen. Sovelluksen avul
 
 [Viikko6](https://github.com/kuukelo/ot-harjoitustyo/releases/tag/viikko6)
 
-[Lopullinen työ, viikko7](https://github.com/kuukelo/ot-harjoitustyo/releases/tag/lopullinen)
+[Lopullinen työ, viikko7](https://github.com/kuukelo/ot-harjoitustyo/releases/tag/loppupalautus)
 
 ## Komentorivitoiminnot
 
