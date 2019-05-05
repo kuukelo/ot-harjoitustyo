@@ -22,6 +22,18 @@
 <groupId>com.h2database</groupId>
 <artifactId>h2</artifactId>
 <version>1.4.197</version>
+	</dependency>
+<dependency>
+  <groupId>de.saxsys</groupId>
+  <artifactId>jfx-testrunner</artifactId>
+  <version>1.2</version>
+</dependency>
+<dependency>
+  <groupId>javafx</groupId>
+  <artifactId>jfxrt</artifactId>
+  <version>${java.version}</version>
+  <scope>system</scope>
+ <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
 </dependency>
     <dependency>
         <groupId>junit</groupId>

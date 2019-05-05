@@ -2,8 +2,9 @@
 
 package recipes.domain;
 
-import java.util.List;
+
 import java.util.Objects;
+import java.util.List;
 
 public class Recipe {
     private String name;
@@ -20,12 +21,6 @@ public class Recipe {
         this.categories = categories;
         this.instructions = instructions;
     }
-//    public Recipe(Integer id, String name, Integer time, String instructions) {
-//        this.id = id;
-//        this.name = name;
-//        this.time = time;
-//        this.instructions = instructions;
-//    }
     public Recipe(Integer id, String name, Integer time, List<Ingredient> ingredients, List<Category> categories, String instructions) {
         this.id = id;
         this.name = name;
@@ -92,22 +87,14 @@ public class Recipe {
             }
         }
     }
+    
     public String toString() {
-        String returnable = name + ", " + getTimeInHours();
-//        + 
-//                "\nIngredients:";
-//        for (Ingredient i: ingredients) {
-//            returnable += "\n" + i;
-//        }
-        returnable += "\nCategories: ";
-        for (Category c: categories) {
-            returnable += c + ", ";
-        }
-        returnable = returnable.substring(0, returnable.length() - 2) + "\n";
+        String returnable = "\n" + name + ", " + getTimeInHours();
+        returnable += "\n" + getIngredientsAsString();
+        returnable += "\n" + getCategoriesAsString();
+        returnable += "\nInstructions: \n" + this.instructions;
+
         return returnable;
-    }
-    public String getFullRecipe() {
-        return "\n" + toString() + "\nInstructions: \n" + this.instructions;
     }
 
     @Override
@@ -127,6 +114,24 @@ public class Recipe {
         }
         return true;
     }
+
+    public String getCategoriesAsString() {
+        String returnable = "Categories: ";
+        for (Category c: categories) {
+            returnable += c + ", ";
+        }
+        returnable = returnable.substring(0, returnable.length() - 2) + "\n";
+        return returnable;
+    }
+
+    public String getIngredientsAsString() {
+        String returnable = "Ingredients: ";
+        for (Ingredient i: ingredients) {
+            returnable += "\n" + i;
+        }
+        return returnable + "\n";
+    }
+    
     
     
 }

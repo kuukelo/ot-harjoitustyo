@@ -6,6 +6,7 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.embed.swing.JFXPanel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,7 +22,9 @@ import recipes.domain.Category;
 import recipes.domain.Ingredient;
 import recipes.domain.Recipe;
 import recipes.editor.DatabaseEditor;
-//import recipes.userinterface.UserInterface;
+import javafx.scene.control.Hyperlink;
+import org.junit.runner.RunWith;
+import recipes.ui.RecipeDatabase;
 
 
 public class RecipeDatabaseTest {
@@ -74,10 +77,6 @@ public class RecipeDatabaseTest {
         addRecipeToDatabase(r1);
         addRecipeToDatabase(r2);
 
-//        
-//        rDao.create(r3);
-//        dbEditor.addIngredientsToDatabase(r3);
-//        dbEditor.addCategoriesToDatabase(r3);
     }
     
     @After
@@ -88,18 +87,6 @@ public class RecipeDatabaseTest {
             dbEditor.addIngredientsToDatabase(r);
             dbEditor.addCategoriesToDatabase(r);
         }
-    }
-    @Test
-    public void listAllWorks1() throws SQLException {
-        dbEditor.setUpDatabase();
-        String wanted = "There are no recipes in the database.";
-        assertTrue(dbEditor.listAll().equals(wanted));
-    }
-    
-    @Test
-    public void listAllWorks2() throws SQLException {
-        String wanted = "\nAll recipes:\n" + r1 + "\n" + r2 + "\n";
-        assertTrue(dbEditor.listAll().equals(wanted));
     }
     
     @Test

@@ -3,9 +3,8 @@ package recipes.ui;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -13,6 +12,7 @@ import static javafx.application.Application.launch;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -30,7 +30,7 @@ import recipes.editor.DatabaseEditor;
 public class RecipeDatabase extends Application {
     private final DatabaseEditor dbEditor;
     private Scene view;
-    private BorderPane layout;
+    public BorderPane layout;
     private Button add;
     private Button seeAll;
     private Button find;
@@ -148,8 +148,8 @@ public class RecipeDatabase extends Application {
             
             try {
                 if (dbEditor.nameIsUnique(name.getText())) {
-                    dbEditor.addNewRecipe(name.getText(), hours.getText(), minutes.getText(), ingredients.getText(), categories.getText(), instructionsText.getText());
-                    editDone.setText("Recipe " + name.getText().toLowerCase() + " has been added");
+                    dbEditor.addNewRecipe(name.getText().trim(), hours.getText(), minutes.getText(), ingredients.getText(), categories.getText(), instructionsText.getText());
+                    editDone.setText("Recipe " + name.getText().toLowerCase().trim() + " has been added");
                 } else {
                     editDone.setText("There already is a recipe named " + name.getText().toLowerCase() + ".\nChange the name and try again, or edit the existing recipe.");
                 }
@@ -164,8 +164,40 @@ public class RecipeDatabase extends Application {
 
     private Node getContentSeeAll() throws SQLException {
         GridPane contentSeeAll = new GridPane();
-        Label seeAllText = new Label(dbEditor.listAll());
-        contentSeeAll.add(seeAllText, 1, 1);
+        GridPane content = new GridPane();
+        Button sortTime = new Button("Sort recipes by time");
+        Button sortCategory = new Button("Sort recipes by category");
+        contentSeeAll.addRow(0, sortTime, sortCategory);
+        List<Recipe> recipes = dbEditor.getAll();
+        
+        if (recipes.isEmpty()) {
+            content.add(new Label("There are no recipes in the database."), 0, 1);
+        } else {
+            addRecipesToContentSeeAll(contentSeeAll, recipes, 0, 1);
+        }
+            
+        
+        sortTime.setOnAction((event) -> {
+            contentSeeAll.getChildren().removeAll(contentSeeAll.getChildren());
+            contentSeeAll.addRow(0, sortTime, sortCategory);
+            try {
+                sortRecipesByTime(contentSeeAll);               
+            } catch (SQLException ex) {
+                Logger.getLogger(RecipeDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        sortCategory.setOnAction((event) -> {
+            contentSeeAll.getChildren().removeAll(contentSeeAll.getChildren());
+            contentSeeAll.addRow(0, sortTime, sortCategory);
+            
+            try {
+                sortRecipesByCategory(contentSeeAll);               
+            } catch (SQLException ex) {
+                Logger.getLogger(RecipeDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        
         return contentSeeAll;
     }
 
@@ -178,11 +210,11 @@ public class RecipeDatabase extends Application {
         
         Button nameEdit = new Button("Name");
         Button timeEdit = new Button("Time");
+        Button instructionsEdit = new Button("Instructions");
         HBox buttons3 = new HBox();
         buttons3.setSpacing(10);
-        buttons3.getChildren().addAll(nameEdit, timeEdit);
+        buttons3.getChildren().addAll(nameEdit, timeEdit, instructionsEdit);
         
-        Button editRecipe = new Button("Edit");
         content.addColumn(0, label, nameLabel, nameOrTime, buttons3);
         content.add(name, 1, 1);
         
@@ -192,6 +224,14 @@ public class RecipeDatabase extends Application {
         
         timeEdit.setOnAction((event) -> {
             layout.setCenter(getEditTimeContent(name.getText()));;
+        });
+        
+        instructionsEdit.setOnAction((event) -> {
+            try {
+                layout.setCenter(getEditInstructionsContent(name.getText()));
+            } catch (SQLException ex) {
+                Logger.getLogger(RecipeDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
        
         return content;
@@ -215,20 +255,20 @@ public class RecipeDatabase extends Application {
         top.setBottom(findTime);
         Label label = new Label("");
         
-        contentTime.add(getContentFind(), 0, 0);
-        contentTime.add(top, 0, 1);
-        contentTime.add(label, 0, 2);
+        contentTime.addColumn(0, getContentFind(), top, label);
         
         findTime.setOnAction((event) -> {
+            contentTime.getChildren().removeAll(contentTime.getChildren());
+            contentTime.addColumn(0, getContentFind(), top, label);
             List<Recipe> recipes = null;
+            
             try {
                 recipes = dbEditor.findRecipesBasedOnTime(Integer.valueOf(time.getText()));
             } catch (SQLException ex) {
                 Logger.getLogger(RecipeDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            contentTime.getChildren().remove(label);
-            label.setText(getSuitables(recipes));
-            contentTime.add(label, 0, 3);
+            
+            getSuitables(recipes, contentTime, label);
         });
         
         return contentTime;
@@ -246,17 +286,17 @@ public class RecipeDatabase extends Application {
         
         content.addColumn(0, getContentFind(), top, label);
         
-        findIngredient.setOnAction((event) -> {            
-            List<Ingredient> ingredientList = getIngredientList(ingredients.getText());            
+        findIngredient.setOnAction((event) -> {
+            content.getChildren().removeAll(content.getChildren());
+            content.addColumn(0, getContentFind(), top, label);            
+            List<Ingredient> ingredientList = dbEditor.getIngredientList(ingredients.getText());            
             List<Recipe> recipes = null;
             try {
                 recipes = dbEditor.findRecipesBasedOnIngredients(ingredientList);
             } catch (SQLException ex) {
                 Logger.getLogger(RecipeDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            content.getChildren().remove(label);
-            label.setText(getSuitables(recipes));
-            content.add(label, 0, 3);
+            getSuitables(recipes, content, label);
         });
         
         return content;
@@ -273,16 +313,16 @@ public class RecipeDatabase extends Application {
         content.addColumn(0, getContentFind(), top, label);
        
         findCategory.setOnAction((event) -> {
-            List<Category> categoryList = getCategoryList(categories.getText());            
+            content.getChildren().removeAll(content.getChildren());
+            content.addColumn(0, getContentFind(), top, label); 
+            List<Category> categoryList = dbEditor.getCategoryList(categories.getText());            
             List<Recipe> recipes = null;
             try {
                 recipes = dbEditor.findRecipesBasedOnCategory(categoryList);
             } catch (SQLException ex) {
                 Logger.getLogger(RecipeDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            content.getChildren().remove(label);
-            label.setText(getSuitables(recipes));
-            content.add(label, 0, 3);
+            getSuitables(recipes, content, label);
         });
         return content;
     }
@@ -301,45 +341,18 @@ public class RecipeDatabase extends Application {
         getFull.setOnAction((event) -> {
             Recipe recipe = null;            
             try {
-                recipe = dbEditor.getRecipe(name.getText());
+                recipe = dbEditor.getRecipe(name.getText().trim());
             } catch (SQLException ex) {
                 Logger.getLogger(RecipeDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            recipeLabel.setText(recipe.getFullRecipe());
+            if (recipe == null) {
+                recipeLabel.setText("There are no recipes matching that name.");
+            } else {
+                recipeLabel.setText(recipe.toString());
+            }
         });
         
         return content;
-    }
-
-    private String getSuitables(List<Recipe> recipes) {
-        if (recipes.isEmpty()) {
-            return "\nNo suitable recipies found.";
-        }
-        String suitable = "\nSuitable recipes:\n\n";
-        for (Recipe r: recipes) {
-            suitable += r.getName() + "\n";
-        }
-        return suitable;
-    }
-
-    private List<Ingredient> getIngredientList(String text) {
-        String s[] = text.split("\\r?\\n");
-        List<String> strings = new ArrayList<>(Arrays.asList(s));
-        List<Ingredient> ingredientList = new ArrayList<>();
-        for (String i: strings) {
-            ingredientList.add(new Ingredient(i));
-        }
-        return ingredientList;
-    }
-
-    private List<Category> getCategoryList(String text) {
-        String s[] = text.split("\\r?\\n");
-        List<String> strings = new ArrayList<>(Arrays.asList(s));
-        List<Category> categoryList = new ArrayList<>();
-        for (String i: strings) {
-            categoryList.add(new Category(i));
-        }
-        return categoryList;
     }
 
     private Node getEditTimeContent(String recipeName) {
@@ -388,6 +401,99 @@ public class RecipeDatabase extends Application {
             content.add(edited, 0, 4);
         });
         return content;
+    }
+    
+    private Node getEditInstructionsContent(String recipeName) throws SQLException {
+        GridPane content = new GridPane();
+        Label label = new Label("Editing recipe " + recipeName.toLowerCase());
+        Label newNameLabel = new Label("Edit below the instructions, click save when you are done.");
+        Recipe recipe = dbEditor.getRecipe(recipeName);
+        TextArea instructions = new TextArea(recipe.getInstructions());
+        Button editRecipe = new Button("Save");
+        Label edited = new Label("Recipe " + recipeName.toLowerCase() + " has been edited.");
+        
+        content.addColumn(0, label, newNameLabel, instructions, editRecipe);
+        
+        editRecipe.setOnAction((event) -> {
+            recipe.setInstructions(instructions.getText());
+            try {
+                dbEditor.updateRecipe(recipe);
+            } catch (SQLException ex) {
+                Logger.getLogger(RecipeDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            content.add(edited, 0, 4);
+        });
+        return content;
+    }
+
+    private void getSuitables(List<Recipe> recipes, GridPane contentTime, Label label) {
+        if (recipes.isEmpty()) {
+            label.setText("\nThere are no suitable recipes.");
+        } else {
+            label.setText("\nSuitable recipes:\n");
+         
+            int i = 3;
+            for (Recipe r: recipes) {
+                Hyperlink link = new Hyperlink(r.getName());
+                contentTime.add(link, 0, i);
+                i++;
+                link.setOnAction(event2 -> {
+                    layout.setCenter(new Label(r.toString()));
+                });   
+            }
+        }
+    } 
+
+    private void sortRecipesByCategory(GridPane contentSeeAll) throws SQLException {
+        Map<Category, List> mapOfRecipes = dbEditor.getRecipesSortedByCategories();
+        int rows = mapOfRecipes.size() / 3;
+        int row = 1;
+        int column = 0;
+        int categoriesSoFar = 0;
+        for (Map.Entry<Category, List> entry : mapOfRecipes.entrySet()) {
+            List<Recipe> recipes = entry.getValue();
+            contentSeeAll.add(new Label(entry.getKey().getCategory()), column, row);
+            
+            addRecipesToContentSeeAll(contentSeeAll, recipes, column, row + 1);
+
+            row += recipes.size() + 2;
+            categoriesSoFar++;
+            
+            if (categoriesSoFar == rows && column <= 3) {
+                column++;
+                categoriesSoFar = 0;
+                row = 1;
+            }
+        }
+    }
+
+    private void sortRecipesByTime(GridPane contentSeeAll) throws SQLException {
+        List<List> listOfRecipeLists = dbEditor.getRecipesSortedByTime();
+        contentSeeAll.addRow(1, new Label("Fast:\n"), new Label("Medium:\n"), new Label("Slow:\n"));
+
+        List<Recipe> fasts = listOfRecipeLists.get(0);
+        addRecipesToContentSeeAll(contentSeeAll, fasts, 0, 2);
+
+        List<Recipe> mediums = listOfRecipeLists.get(1);
+        addRecipesToContentSeeAll(contentSeeAll, mediums, 1, 2);
+        
+        List<Recipe> slows = listOfRecipeLists.get(2);
+        addRecipesToContentSeeAll(contentSeeAll, slows, 2, 2);
+        
+    }
+    
+    public void addRecipesToContentSeeAll(GridPane contentSeeAll, List<Recipe> recipes, int column, int row) {
+        for (Recipe r: recipes) {
+            Hyperlink link = new Hyperlink(r.getName());
+            link.setOnAction(event2 -> {
+                layout.setCenter(new Label(r.toString()));
+            });  
+            HBox box = new HBox();
+            box.getChildren().addAll(link, new Label(r.getTimeInHours()));
+            contentSeeAll.add(box, column, row);
+            row++;
+        }
+        contentSeeAll.add(new Label(""), column, row);
     }
     
 }
