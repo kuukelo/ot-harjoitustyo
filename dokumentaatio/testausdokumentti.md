@@ -14,7 +14,7 @@ Graafisen käyttöliittymä on jätetty testien ulkopuolelle, eikä sen metodeja
 ![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Testikattavuus.PNG)
 
 Testikattavuus on tällä hetkellä riittävä. Kaikkia gettereitä ja settereitä ei tarkisteta. 
-Kattavuudesta uupuu myös rivit, jotka käsittelevät virhetilanteita, jos tietokantaa ei esimerkiksi löydy. 
+Kattavuudesta uupuu myös rivit, jotka käsittelevät virhetilanteita, jos tietokantaa ei esimerkiksi löydy. Muutama viimeisimpänä lisätty metodi jää myös tarkistamatta.
 
 ## Järjestelmätestaus
 
