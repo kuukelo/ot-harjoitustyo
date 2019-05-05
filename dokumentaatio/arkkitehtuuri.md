@@ -4,7 +4,7 @@
 
 Ohjelma noudattaa seuraavaa pakkausrakennetta. Aluksi siirrytään luokkaan ui, josta ohjelma käynnistetään. Suurin osa metodeista löytyy userinterfacen alta, joka käyttää hyödykseen luokkia domainista. 
 
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/Rakenne.png)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Rakenne.png)
 
 ## Käyttöliittymä
 
@@ -17,7 +17,7 @@ Respeti luokka pitää kirjaa resepteistä, niihin on tallennettu lista ainesosi
 
 ### Luokkakaavio
 
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/Luokkakaavio.png)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Luokkakaavio.png)
 
 ### Sekvenssikaavio
 
@@ -25,7 +25,7 @@ Respeti luokka pitää kirjaa resepteistä, niihin on tallennettu lista ainesosi
 
 Sekvenssikaaviosta puuttuu reseptin ohjeiden (method) lisääminen. Sillä se on lisätty ohjelmaan viime metreillä.
 
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/Sekvenssikaavio.jpg)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Sekvenssikaavio.jpg)
 
 
 ## Tietojen pysyväistallennus
