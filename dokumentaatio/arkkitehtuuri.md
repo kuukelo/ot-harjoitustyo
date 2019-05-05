@@ -16,7 +16,7 @@ Resepti luokka pitää kirjaa resepteistä, niihin on tallennettu lista ainesosi
 
 ### Tietokantakaavio
 
-![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tietokantakaavio.PNG)
+![alt text](https://github.com/kuukelo/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tietokantakaavio.png)
 
 ### Sekvenssikaavio
 
