@@ -13,14 +13,28 @@ public class IngredientRecipe {
     private Ingredient ingredient;
     private Recipe recipe;
     
+    /**
+     *
+     * @param i
+     * @param r
+     */
     public IngredientRecipe(Ingredient i, Recipe r) {
         this.ingredient = i;
         this.recipe = r;
     }
 
+    /**
+     *
+     * @return
+     */
     public Recipe getRecipe() {
         return recipe;
     }
+
+    /**
+     *
+     * @return
+     */
     public Ingredient getIngredient() {
         return ingredient;
     }

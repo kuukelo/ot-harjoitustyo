@@ -6,6 +6,10 @@ package recipes.domain;
 import java.util.Objects;
 import java.util.List;
 
+/**
+ *
+ * @author Elina
+ */
 public class Recipe {
     private String name;
     private int time;
@@ -14,6 +18,14 @@ public class Recipe {
     private Integer id;
     private String instructions;
     
+    /**
+     *
+     * @param name
+     * @param time
+     * @param ingredients
+     * @param categories
+     * @param instructions
+     */
     public Recipe(String name, Integer time, List<Ingredient> ingredients, List<Category> categories, String instructions) {
         this.name = name;
         this.time = time;
@@ -21,6 +33,16 @@ public class Recipe {
         this.categories = categories;
         this.instructions = instructions;
     }
+
+    /**
+     *
+     * @param id
+     * @param name
+     * @param time
+     * @param ingredients
+     * @param categories
+     * @param instructions
+     */
     public Recipe(Integer id, String name, Integer time, List<Ingredient> ingredients, List<Category> categories, String instructions) {
         this.id = id;
         this.name = name;
@@ -29,50 +51,107 @@ public class Recipe {
         this.categories = categories;
         this.instructions = instructions;
     }
+
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
+
+    /**
+     *
+     * @return
+     */
     public Integer getId() {
         return this.id;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTime() {
         return time;
     }
 
+    /**
+     *
+     * @param time
+     */
     public void setTime(int time) {
         this.time = time;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
+    /**
+     *
+     * @param ingredients
+     */
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Category> getCategories() {
         return categories;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getInstructions() {
         return this.instructions;
     }
+
+    /**
+     *
+     * @param instructions
+     */
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
+
+    /**
+     *
+     * @param categories
+     */
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTimeInHours() {
         if (this.time < 60) {
             return this.time + " min";
@@ -115,6 +194,10 @@ public class Recipe {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCategoriesAsString() {
         String returnable = "Categories: ";
         for (Category c: categories) {
@@ -124,6 +207,10 @@ public class Recipe {
         return returnable;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIngredientsAsString() {
         String returnable = "Ingredients: ";
         for (Ingredient i: ingredients) {

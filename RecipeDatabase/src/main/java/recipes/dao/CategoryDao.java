@@ -15,13 +15,17 @@ import java.util.List;
 import recipes.domain.Category;
 
 /**
- *
+ * This dao is designated for the Category table in database.
  * @author Elina
  */
 
 public class CategoryDao {
    
-
+    /**
+     * Creates new Category line to database
+     * @param category
+     * @throws SQLException
+     */
     public void create(Category category) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO Category (category) VALUES (?)");
@@ -35,7 +39,12 @@ public class CategoryDao {
         category.setId(id);
     }
 
-
+    /**
+     * Gets a line from database based on id and returns the info
+     * @param key
+     * @return
+     * @throws SQLException
+     */
     public Category read(Integer key) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Category WHERE id = ?");
@@ -54,6 +63,11 @@ public class CategoryDao {
         return category;
     }
 
+    /**
+     * Creates a list of the lines in database and returns it. 
+     * @return
+     * @throws SQLException
+     */
     public List<Category> list() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Category");
@@ -73,6 +87,12 @@ public class CategoryDao {
         return categories;
     }
 
+    /** 
+     * Returns the just created id
+     * @param category
+     * @return
+     * @throws SQLException
+     */
     public int getGeneratedId(String category) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Category WHERE category = ?");

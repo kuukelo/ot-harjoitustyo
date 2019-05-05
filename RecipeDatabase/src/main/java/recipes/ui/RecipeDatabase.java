@@ -25,11 +25,17 @@ import recipes.domain.Ingredient;
 import recipes.domain.Recipe;
 import recipes.editor.DatabaseEditor;
 
-
-
+/**
+ * This is the ui of the program. It creates and edits the javafx window and view. It gets information from DatabaseEditor.
+ * @author Elina
+ */
 public class RecipeDatabase extends Application {
     private final DatabaseEditor dbEditor;
     private Scene view;
+
+    /**
+     *
+     */
     public BorderPane layout;
     private Button add;
     private Button seeAll;
@@ -47,6 +53,10 @@ public class RecipeDatabase extends Application {
     private Button category;
     private Button getRecipe;
     
+    /**
+     *
+     * @throws IOException
+     */
     public RecipeDatabase() throws IOException {
         this.dbEditor = new DatabaseEditor();
         this.layout = new BorderPane();
@@ -121,6 +131,11 @@ public class RecipeDatabase extends Application {
         window.show();
     }
 
+    /**
+     * Main mehtod that launches the javafx window.
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
         launch(RecipeDatabase.class);
     }
@@ -332,13 +347,13 @@ public class RecipeDatabase extends Application {
         Label label = new Label("Here you can get full recipe.");
         Label nameLabel = new Label("What is the name of the recipe you want? ");
         TextField name = new TextField();
-        Button getFull = new Button("Get the recipe");
+        Button getFullRecipe = new Button("Get the recipe");
         Label recipeLabel = new Label("");
         content.addColumn(0, label, nameLabel, getFull, recipeLabel);
         content.add(name, 1, 1);
         
         
-        getFull.setOnAction((event) -> {
+        getFullRecipe.setOnAction((event) -> {
             Recipe recipe = null;            
             try {
                 recipe = dbEditor.getRecipe(name.getText().trim());
@@ -482,6 +497,14 @@ public class RecipeDatabase extends Application {
         
     }
     
+    /**
+     * This gets a GridPane, list of recipes and column and row information. It goes through the recipes and adds them to 
+     * the gridpane according to the column and row information. 
+     * @param contentSeeAll
+     * @param recipes
+     * @param column
+     * @param row
+     */
     public void addRecipesToContentSeeAll(GridPane contentSeeAll, List<Recipe> recipes, int column, int row) {
         for (Recipe r: recipes) {
             Hyperlink link = new Hyperlink(r.getName());

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package recipes.dao;
 
 import java.sql.Connection;
@@ -16,12 +12,17 @@ import recipes.domain.Category;
 import recipes.domain.CategoryRecipe;
 
 /**
- *
+ * This dao is designated for the CategoryRecipe table in database.
  * @author Elina
  */
 
 public class CategoryRecipeDao {
     
+    /**
+     * Creates new CategoryRecipe line to database
+     * @param cr
+     * @throws SQLException
+     */
     public void create(CategoryRecipe cr) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO CategoryRecipe (category_id, recipe_id) VALUES (?, ?)");
@@ -33,6 +34,12 @@ public class CategoryRecipeDao {
         conn.close();
     }
 
+    /**
+     * Gets a line from database based on id and returns the info
+     * @param key
+     * @return
+     * @throws SQLException
+     */
     public CategoryRecipe read(Integer key) throws SQLException {
         RecipeDao rDao = new RecipeDao();
         CategoryDao cDao = new CategoryDao();
@@ -56,6 +63,11 @@ public class CategoryRecipeDao {
         return cr;
     }
 
+    /**
+     * Creates a list of the lines in database and returns it. 
+     * @return
+     * @throws SQLException
+     */
     public List<CategoryRecipe> list() throws SQLException {
         RecipeDao rDao = new RecipeDao();
         CategoryDao cDao = new CategoryDao();
@@ -79,6 +91,12 @@ public class CategoryRecipeDao {
         return crList;    
     }
     
+    /**
+     * Returns the just created id
+     * @param key
+     * @return
+     * @throws SQLException
+     */
     public List<Category> listByRecipe(Integer key) throws SQLException {
         CategoryDao cDao = new CategoryDao();
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");

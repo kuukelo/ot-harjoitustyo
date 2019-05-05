@@ -225,12 +225,6 @@ public class RecipeDatabaseTest {
         dbEditor.addIngredientsToDatabase(r3);
         assertTrue(iDao.list().contains(r3.getIngredients().get(2)));
     }
-//    @Test
-//    public void addIngredientToDatabaseWorks2() throws SQLException {
-//        rDao.create(r3);
-//        dbEditor.addIngredientsToDatabase(r3);
-//        assertTrue(irDao.list().get(6).getIngredient().equals(new Ingredient("soda")));
-//    }
     
     @Test
     public void addCategoryToDatabaseWorks1() throws SQLException {
@@ -239,13 +233,9 @@ public class RecipeDatabaseTest {
         assertTrue(cDao.list().contains(r3.getCategories().get(0)));
     }
     
-//    @Test
-//    public void addCategoryToDatabaseWorks2() throws SQLException {
-//        rDao.create(r3);
-//        dbEditor.addCategoriesToDatabase(r3);
-//        assertTrue(crDao.list().get(4).getCategory().equals(new Category("drink")));
-//        
-//    }
+    
+    
+
 
     private Recipe getRecipe1() {
         String name = "Onionsoup";

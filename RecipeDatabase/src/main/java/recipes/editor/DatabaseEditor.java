@@ -26,13 +26,12 @@ import recipes.dao.RecipeDao;
 import recipes.domain.CategoryRecipe;
 import recipes.domain.IngredientRecipe;
 
-    /* 
-    * This is editor, which gets information from different daos and prcesses it.  
-    * The methods send info bakc to daos to save or to ui to show to the user.
-    * 
-    */
 
-
+/**
+ *This is editor, which gets information from different daos and processes it.  
+ * The methods send info back to daos to save or to ui to show to the user.
+ * @author Elina
+ */
 @Component
 public class DatabaseEditor {
     
@@ -47,6 +46,9 @@ public class DatabaseEditor {
     @Autowired
     CategoryRecipeDao crDao;
     
+    /**
+     *
+     */
     public DatabaseEditor()  {
         rDao = new RecipeDao();
         iDao = new IngredientDao();
@@ -54,12 +56,12 @@ public class DatabaseEditor {
         irDao = new IngredientRecipeDao();
         crDao = new CategoryRecipeDao();
     }
-    
-    /* 
-    *  This method can be used to clear and set up the database if needed.
-    *  At the moment it isn't used in other methods. But it was left here for convinience.
-    * 
-    */
+
+    /**
+     * This method can be used to clear and set up the database if needed.
+     * At the moment it isn't used in other methods. But it was left here for convinience.
+     */
+
     public static void setUpDatabase() {
 
         try (Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "")) {
@@ -95,16 +97,23 @@ public class DatabaseEditor {
         }
     }
     
-    /* 
-    *  This is simple method that gets all recipes from database and returns them as a list.
-    *  
-    * 
-    */
+    /** 
+     *  This is simple method that gets all recipes from database and returns them as a list.
+     *  
+     * @return
+     * @throws SQLException
+     */
+
    
     public List<Recipe> getAll() throws SQLException {
         return rDao.list();
     }
     
+    /**
+     *
+     * @param recipes
+     * @return
+     */
     public String recipesAsList(List<Recipe> recipes) {
         String returnable = "";
         for (Recipe r: recipes) {
@@ -114,11 +123,13 @@ public class DatabaseEditor {
         
     }
 
-    /* 
-    *  This method gets all recipes that use wanted ingredients and returns them as a list.
-    *  
-    * 
-    */
+    /**
+     * This method gets all recipes that use wanted ingredients and returns them as a list.
+     * @param ingredients
+     * @return
+     * @throws SQLException
+     */
+
     
     public List<Recipe> findRecipesBasedOnIngredients(List<Ingredient> ingredients) throws SQLException {
         List<Recipe> recipes = rDao.list();
@@ -132,11 +143,14 @@ public class DatabaseEditor {
         return wantedrecipes;
     }
 
-    /* 
-    * This method gets all recipes that belong to wanted categories and returns them as a list.
-    * 
-    *
-    */
+
+    /**
+     * This method gets all recipes that belong to wanted categories and returns them as a list.
+     * @param categories
+     * @return
+     * @throws SQLException
+     */
+
     
     public List<Recipe> findRecipesBasedOnCategory(List<Category> categories) throws SQLException {
         List<Recipe> recipes = rDao.list();
@@ -150,11 +164,14 @@ public class DatabaseEditor {
         return wantedrecipes;
     }
     
-    /* 
-    * This method gets all recipes that have preparing time lower than wanted time and returns them as a list.
-    * 
-    *
-    */
+
+    /**
+     * This method gets all recipes that have preparing time lower than wanted time and returns them as a list.
+     * @param time
+     * @return
+     * @throws SQLException
+     */
+
 
     public List<Recipe> findRecipesBasedOnTime(int time) throws SQLException {
         List<Recipe> recipes = rDao.list();
@@ -168,11 +185,14 @@ public class DatabaseEditor {
         return wantedrecipes;
     }
 
-    /* 
-    * This method finds the wanted recipe based on given recipe name and returns it.
-    * 
-    *
-    */
+
+    /**
+     * This method finds the wanted recipe based on given recipe name and returns it.
+     * @param name
+     * @return
+     * @throws SQLException
+     */
+
     
     public Recipe getRecipe(String name) throws SQLException {
         List<Recipe> recipes = rDao.list();
@@ -183,12 +203,14 @@ public class DatabaseEditor {
         }
         return null;
     }
-    
-    /* 
-    * This method edits the time of the wanted recipe and saves it to database.
-    * 
-    *
-    */
+
+    /**
+     * This method edits the time of the wanted recipe and saves it to database.
+     * @param recipeName
+     * @param time
+     * @throws SQLException
+     */
+
 
     public void editTime(String recipeName, int time) throws SQLException {
         List<Recipe> recipes = rDao.list();
@@ -201,11 +223,14 @@ public class DatabaseEditor {
         }
     }
     
-    /* 
-    * This method edits the name of the wanted recipe and saves it to database.
-    * 
-    *
-    */
+
+    /**
+     * This method edits the name of the wanted recipe and saves it to database.
+     * @param recipeName
+     * @param newName
+     * @throws SQLException
+     */
+
     
     public void editName(String recipeName, String newName) throws SQLException {
         List<Recipe> recipes = rDao.list();
@@ -217,22 +242,27 @@ public class DatabaseEditor {
             }
         }
     }
-    
-    /* 
-    * This method gets a recipe that has been updated and updates the info to database. 
-    * 
-    *
-    */
+
+
+    /**
+     * This method gets a recipe that has been updated and updates the info to database. 
+     * @param r
+     * @throws SQLException
+     */
+
     
     public void updateRecipe(Recipe r) throws SQLException {
         rDao.update(r);
     }
     
-    /* 
-    * This method gets info in strings and processes it to time in minutes and returns it.
-    * 
-    *
-    */
+
+    /**
+     * This method gets info in strings and processes it to time in minutes and returns it.
+     * @param hoursS
+     * @param minutesS
+     * @return
+     */
+
     
     public Integer getTime(String hoursS, String minutesS) {
         int hours = 0;
@@ -246,11 +276,13 @@ public class DatabaseEditor {
         return 60 * hours + minutes;
     }
     
-    /* 
-    * This method gets info in strings and processes it to list of ingredients. 
-    * 
-    *
-    */
+
+    /**
+     * This method gets info in strings and processes it to list of ingredients. 
+     * @param text
+     * @return
+     */
+
 
     public List<Ingredient> getIngredientList(String text) {
         String s[] = text.split("\\r?\\n");
@@ -263,11 +295,13 @@ public class DatabaseEditor {
         return ingredientList;
     }
 
-    /* 
-    * This method gets info in strings and processes it to list of categories. 
-    * 
-    *
-    */
+
+    /**
+     * This method gets info in strings and processes it to list of categories. 
+     * @param text
+     * @return
+     */
+
     
     public List<Category> getCategoryList(String text) {
         String s[] = text.split("\\r?\\n");
@@ -280,11 +314,17 @@ public class DatabaseEditor {
         return categoryList;
     }
 
-    /* 
-    * This method gets info in strings and processes it to info making a new recipe need. Then it creates a new recipe and saves it to database. 
-    * 
-    *
-    */
+    /**
+     * This method gets info in strings and processes it to info making a new recipe need. Then it creates a new recipe and saves it to database. 
+     * @param name
+     * @param hours
+     * @param minutes
+     * @param ingredients
+     * @param categories
+     * @param instructionsText
+     * @throws SQLException
+     */
+
     
     public void addNewRecipe(String name, String hours, String minutes, String ingredients, String categories, String instructionsText) throws SQLException {
         String recipeName = name;
@@ -300,11 +340,14 @@ public class DatabaseEditor {
         addCategoriesToDatabase(recipe);
     }
 
-    /* 
-    * This method checks if database contains the wanted ingredients.  
-    * 
-    *
-    */
+
+    /**
+     * This method checks if database contains the wanted ingredients.  
+     * @param ingredient
+     * @return
+     * @throws SQLException
+     */
+
     
     public boolean databaseContainsIngredient(Ingredient ingredient) throws SQLException {
         List<Ingredient> allIngredients = iDao.list();
@@ -317,11 +360,14 @@ public class DatabaseEditor {
         return false;
     }
     
-    /* 
-    * This method checks if database contains the wanted category.  
-    * 
-    *
-    */
+
+    /**
+     * This method checks if database contains the wanted category.  
+     * @param category
+     * @return
+     * @throws SQLException
+     */
+
     
     public boolean databaseContainsCategory(Category category) throws SQLException {
         List<Category> allCategories = cDao.list();
@@ -334,11 +380,14 @@ public class DatabaseEditor {
         return false;
     }
 
-    /* 
-    * This method checks that database doesn't already have a recipe by the wanted name.
-    * 
-    *
-    */
+
+    /**
+     * This method checks that database doesn't already have a recipe by the wanted name.
+     * @param name
+     * @return
+     * @throws SQLException
+     */
+
     
     public boolean nameIsUnique(String name) throws SQLException {
         List<Recipe> recipes = rDao.list();
@@ -350,11 +399,13 @@ public class DatabaseEditor {
         return true;
     }
 
-    /* 
-    * This method gets the newly created recipe and adds it's ingredients to database if they don't exist already.  
-    * Then it adds them to IngredientRecipe table so that we can match the recipe and ingredients.
-    *
-    */
+    /**
+     * This method gets the newly created recipe and adds it's ingredients to database if they don't exist already.  
+     * Then it adds them to IngredientRecipe table so that we can match the recipe and ingredients.
+     * @param recipe
+     * @throws SQLException
+     */
+
     
     public void addIngredientsToDatabase(Recipe recipe) throws SQLException {
         for (Ingredient i: recipe.getIngredients()) {
@@ -373,6 +424,14 @@ public class DatabaseEditor {
     * Then it adds them to CategoryRecipe table so that we can match the recipe and categories.
     *
     */
+
+    /**
+     * This method gets the newly created recipe and adds it's categories to database if they doen't exist already.  
+     * Then it adds them to CategoryRecipe table so that we can match the recipe and categories.
+     * @param recipe
+     * @throws SQLException
+     */
+
     
     public void addCategoriesToDatabase(Recipe recipe) throws SQLException {
         for (Category c: recipe.getCategories()) {
@@ -385,12 +444,13 @@ public class DatabaseEditor {
             crDao.create(cr);
         }
     }
-    
-    /* 
-    * This method sorts all recipes based on time (3 categories), puts them in lists and returns the lists. 
-    *
-    *
-    */
+
+    /**
+     * This method sorts all recipes based on time (3 categories), puts them in lists and returns the lists. 
+     * @return
+     * @throws SQLException
+     */
+
 
     public List<List> getRecipesSortedByTime() throws SQLException {
         List<List> recipeLists = new ArrayList<>();
@@ -414,12 +474,15 @@ public class DatabaseEditor {
         return recipeLists;
        
     }
-    
-    /* 
-    * This method sorts all recipes based on categories, 
-    * puts them in lists and puts the list with the category as a key to a hasmap and returns it. 
-    *
-    */
+
+
+    /**
+     * This method sorts all recipes based on categories, 
+     * puts them in lists and puts the list with the category as a key to a hasmap and returns it. 
+     * @return
+     * @throws SQLException
+     */
+
     
     public Map<Category, List> getRecipesSortedByCategories() throws SQLException {
         List<Category> categories = cDao.list();

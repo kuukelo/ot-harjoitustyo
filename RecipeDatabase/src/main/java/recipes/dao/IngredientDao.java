@@ -12,25 +12,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-import recipes.domain.Category;
 import recipes.domain.Ingredient;
-import recipes.domain.Recipe;
 
 /**
- *
+ * This dao is designated for the Ingredient table in database.
  * @author Elina
  */
 @Component
 public class IngredientDao {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
     
+    /**
+     * Creates new Ingredient line to database
+     * @param ingredient
+     * @throws SQLException
+     */
     public void create(Ingredient ingredient) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO Ingredient (ingredient) VALUES (?)");
@@ -44,6 +41,12 @@ public class IngredientDao {
         ingredient.setId(id);
     }
 
+    /**
+     * Gets a line from database based on id and returns the info
+     * @param key
+     * @return
+     * @throws SQLException
+     */
     public Ingredient read(Integer key) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Ingredient WHERE id = ?");
@@ -63,12 +66,11 @@ public class IngredientDao {
         return ingredient;
     }
 
-    public Ingredient update(Ingredient ingredient) throws SQLException {
-        jdbcTemplate.update("UPDATE Ingredient SET ingredient = ? WHERE id = ?",
-            ingredient.getIngredient(), ingredient.getId());        
-        return ingredient;
-    }
-
+    /**
+     * Creates a list of the lines in database and returns it. 
+     * @return
+     * @throws SQLException
+     */
     public List<Ingredient> list() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Ingredient");
@@ -88,6 +90,13 @@ public class IngredientDao {
         
         return ingredients;
     }
+
+    /**
+     * Returns the just created id
+     * @param name
+     * @return
+     * @throws SQLException
+     */
     public Integer getGeneratedId(String name) throws SQLException {
 
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");

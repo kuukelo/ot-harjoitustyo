@@ -17,13 +17,17 @@ import recipes.domain.Ingredient;
 import recipes.domain.IngredientRecipe;
 
 /**
- *
+ * This dao is designated for the IngredientRecipe table in database.
  * @author Elina
  */
 @Component
 public class IngredientRecipeDao {
     
-
+    /**
+     * Creates new IngredientRecipe line to database
+     * @param ir
+     * @throws SQLException
+     */
     public void create(IngredientRecipe ir) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./recipedatabase", "sa", "");
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO IngredientRecipe (ingredient_id, recipe_id) VALUES (?, ?)");
@@ -35,6 +39,12 @@ public class IngredientRecipeDao {
         conn.close();
     }
 
+    /**
+     * Gets a line from database based on id and returns the info
+     * @param key
+     * @return
+     * @throws SQLException
+     */
     public IngredientRecipe read(Integer key) throws SQLException {
         RecipeDao rDao = new RecipeDao();
         IngredientDao iDao = new IngredientDao();
@@ -58,6 +68,11 @@ public class IngredientRecipeDao {
         return ir;
     }
 
+    /**
+     * Creates a list of the lines in database and returns it. 
+     * @return
+     * @throws SQLException
+     */
     public List<IngredientRecipe> list() throws SQLException {
         RecipeDao rDao = new RecipeDao();
         IngredientDao iDao = new IngredientDao();
@@ -82,6 +97,12 @@ public class IngredientRecipeDao {
         
     }
     
+    /**
+     * Returns the just created id
+     * @param key
+     * @return
+     * @throws SQLException
+     */
     public List<Ingredient> listByRecipe(Integer key) throws SQLException {
         IngredientDao iDao = new IngredientDao();
         

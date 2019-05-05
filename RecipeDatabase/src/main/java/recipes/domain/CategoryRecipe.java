@@ -13,13 +13,28 @@ public class CategoryRecipe {
     private Category category;
     private Recipe recipe;
     
+    /**
+     *
+     * @param c
+     * @param r
+     */
     public CategoryRecipe(Category c, Recipe r) {
         this.category = c;
         this.recipe = r;
     }
+
+    /**
+     *
+     * @return
+     */
     public Recipe getRecipe() {
         return recipe;
     }
+
+    /**
+     *
+     * @return
+     */
     public Category getCategory() {
         return category;
     }
